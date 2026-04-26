@@ -14,6 +14,30 @@ Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischspr
 
 Keine externen Fonts, keine Analytics, keine Embeds, keine Supabase-Verbindung und kein Resend-Versand in Batch 1.
 
+## Batch 2: Premium Design Rework
+
+Dieser Batch überarbeitet ausschließlich Design, Layout, UX, Bildwirkung und visuelle Qualität der statischen Website.
+
+Umgesetzt:
+
+- Hero visuell neu als dunkles Konzertposter inszeniert
+- großes Typhoon-Script-Logo als separates Overlay-Keyvisual über dem Bandmotiv
+- Designsystem mit wärmerem Schwarz, Sepia-/Gold-Licht, Film-Grain, hochwertigen Linien und besseren Buttons verbessert
+- Header mit horizontaler Navigation, Social-Platzhaltern und prominentem Listen-Button überarbeitet
+- Startseite kompakter aufgebaut mit Feature-Zone für nächste Show, Demos, Galerie und Booking
+- Musikseite, Shows-Seite und Booking-Seite optisch hochwertiger gestaltet
+- Mitglieder-Vorschau editorialer gestaltet, mit stärkerer Bildwirkung für Mika und Taifun
+
+Weiterhin nicht aktiv:
+
+- keine Supabase-Integration
+- kein Admin-Bereich
+- keine Auth-Logik
+- kein Resend-Mailversand
+- keine Datenbank-, Storage-, Shop- oder Booking-Versand-Logik
+
+Nächste Phase bleibt `Supabase Schema + Auth + RLS`, aber erst nach Designfreigabe.
+
 ## Setup
 
 ```bash
@@ -110,7 +134,7 @@ Regel: Wenn später eine URL gesetzt und `active: true` ist, wird der Link geren
 
 ## Nächste geplante Batches
 
-1. Supabase Schema + Auth + RLS
+1. Supabase Schema + Auth + RLS nach Designfreigabe
 2. Admin-Grundbereich
 3. Content-CRUD
 4. Booking mit Resend

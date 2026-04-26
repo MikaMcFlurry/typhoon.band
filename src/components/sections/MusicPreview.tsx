@@ -14,9 +14,9 @@ type MusicPreviewProps = {
 
 export function MusicPreview({ locale, title, copy, note, cta }: MusicPreviewProps) {
   return (
-    <section className="mx-auto max-w-[1840px] px-4 py-20 sm:px-6 lg:px-12">
+    <section className="mx-auto max-w-[1480px] px-4 py-20 sm:px-6 lg:px-10">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <SectionHeading copy={copy} title={title} />
+        <SectionHeading copy={copy} eyebrow="Demos" title={title} />
         <Button href={`/${locale}/music`} variant="secondary">
           {cta}
         </Button>

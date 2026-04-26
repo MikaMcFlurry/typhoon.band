@@ -1,9 +1,9 @@
 import { BandIntro } from "@/components/sections/BandIntro";
 import { BookingCTA } from "@/components/sections/BookingCTA";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { HomeFeatureGrid } from "@/components/sections/HomeFeatureGrid";
 import { MemberCard } from "@/components/sections/MemberCard";
 import { MusicPreview } from "@/components/sections/MusicPreview";
-import { ShowsPreview } from "@/components/sections/ShowsPreview";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { members } from "@/data/members";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -17,18 +17,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <HeroSection
-        bandLabel={dictionary.common.bandMore}
         bookingLabel={dictionary.common.booking}
-        bookingCopy={dictionary.home.bookingCopy}
-        bookingTitle={dictionary.home.bookingTitle}
         eyebrow={dictionary.home.eyebrow}
         headline={dictionary.home.headline}
         listenLabel={dictionary.common.listen}
+        liveLabel={dictionary.common.live}
         locale={locale}
-        nextShowCopy={dictionary.home.showsCopy}
-        nextShowTitle={dictionary.home.showsTitle}
         subline={dictionary.home.subline}
       />
+      <HomeFeatureGrid locale={locale} />
       <MusicPreview
         copy={dictionary.home.musicCopy}
         cta={dictionary.common.listen}
@@ -41,17 +38,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <SectionHeading title={dictionary.home.membersTitle} />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {members.slice(0, 4).map((member) => (
-            <MemberCard key={member.id} member={member} />
+            <MemberCard key={member.id} member={member} showPlaceholderBadge={false} />
           ))}
         </div>
       </section>
-      <ShowsPreview
-        copy={dictionary.home.showsCopy}
-        cta={dictionary.common.allShows}
-        labels={dictionary.shows.status}
-        locale={locale}
-        title={dictionary.home.showsTitle}
-      />
       <BookingCTA copy={dictionary.home.bookingCopy} cta={dictionary.common.booking} locale={locale} title={dictionary.home.bookingTitle} />
     </>
   );

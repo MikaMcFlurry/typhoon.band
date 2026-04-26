@@ -12,10 +12,13 @@ export const dictionaries = {
       band: "Band",
       music: "Musik",
       shows: "Shows",
+      gallery: "Galerie",
       booking: "Booking",
+      contact: "Kontakt",
     },
     common: {
-      listen: "Demos anhören",
+      listen: "Songs anhören",
+      live: "Live erleben",
       booking: "Booking anfragen",
       bandMore: "Mehr über die Band",
       allShows: "Alle Shows ansehen",
@@ -26,10 +29,10 @@ export const dictionaries = {
       backHome: "Zur Startseite",
     },
     home: {
-      eyebrow: "Bluesrock · Funk · Soul · Jazz · Southern Rock",
-      headline: "Blues, Funk & Turkish Soul.",
+      eyebrow: "BLUESROCK • FUNK • SOUL • JAZZ • SOUTHERN ROCK",
+      headline: "SMOOTH.\nEXCEPTIONAL.\nFUNK.",
       subline:
-        "Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten und kraftvoller Live-Energie.",
+        "Typhoon verbindet türkischsprachige Texte mit Bluesrock, Funk, Soul, Jazz und Southern Rock - kraftvoll, warm und live voller Energie.",
       musicTitle: "Songs mit Live-Kante",
       musicCopy: "Aktuelle Demo-Aufnahmen - finale Releases folgen.",
       bandTitle: "Amerikanisches Feeling. Europäische Seele. Türkische Texte.",
@@ -94,10 +97,13 @@ export const dictionaries = {
       band: "Band",
       music: "Music",
       shows: "Shows",
+      gallery: "Gallery",
       booking: "Booking",
+      contact: "Contact",
     },
     common: {
       listen: "Listen to demos",
+      live: "Experience live",
       booking: "Booking request",
       bandMore: "More about the band",
       allShows: "View all shows",
@@ -108,8 +114,8 @@ export const dictionaries = {
       backHome: "Back home",
     },
     home: {
-      eyebrow: "Blues rock · Funk · Soul · Jazz · Southern Rock",
-      headline: "Blues, Funk & Turkish Soul.",
+      eyebrow: "BLUES ROCK • FUNK • SOUL • JAZZ • SOUTHERN ROCK",
+      headline: "SMOOTH.\nEXCEPTIONAL.\nFUNK.",
       subline:
         "Typhoon blends blues rock, funk, soul, jazz and southern rock with Turkish lyrics and powerful live energy.",
       musicTitle: "Songs with a live edge",
@@ -175,10 +181,13 @@ export const dictionaries = {
       band: "Grup",
       music: "Müzik",
       shows: "Konserler",
+      gallery: "Galeri",
       booking: "Booking",
+      contact: "İletişim",
     },
     common: {
       listen: "Demoları dinle",
+      live: "Canlı izle",
       booking: "Booking isteği",
       bandMore: "Grup hakkında",
       allShows: "Tüm konserler",
@@ -189,8 +198,8 @@ export const dictionaries = {
       backHome: "Ana sayfaya dön",
     },
     home: {
-      eyebrow: "Blues rock · Funk · Soul · Caz · Southern Rock",
-      headline: "Blues, Funk & Turkish Soul.",
+      eyebrow: "BLUES ROCK • FUNK • SOUL • CAZ • SOUTHERN ROCK",
+      headline: "SMOOTH.\nEXCEPTIONAL.\nFUNK.",
       subline:
         "Typhoon; blues rock, funk, soul, caz ve southern rock soundunu Türkçe sözler ve güçlü sahne enerjisiyle birleştirir.",
       musicTitle: "Canlı enerjili şarkılar",

@@ -6,6 +6,7 @@
   --gold: #d7a14a;
   --gold-soft: #f6d38a;
   --line: rgba(246, 211, 138, 0.24);
+  --panel: rgba(8, 7, 6, 0.76);
 }
 
 @theme inline {
@@ -26,8 +27,9 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 50% 0%, rgba(159, 100, 39, 0.2), transparent 36rem),
-    linear-gradient(180deg, #080604 0%, #050403 52%, #100a06 100%);
+    radial-gradient(circle at 78% 0%, rgba(176, 111, 41, 0.16), transparent 38rem),
+    radial-gradient(circle at 10% 28%, rgba(215, 161, 74, 0.08), transparent 28rem),
+    linear-gradient(180deg, #080604 0%, #040302 54%, #100a06 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
 }
@@ -58,18 +60,43 @@ a {
 .typhoon-frame {
   border: 1px solid var(--line);
   background:
-    linear-gradient(135deg, rgba(215, 161, 74, 0.08), transparent 42%),
-    rgba(7, 6, 5, 0.74);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.72), 0 24px 70px rgba(0, 0, 0, 0.36);
+    linear-gradient(135deg, rgba(215, 161, 74, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 46%),
+    var(--panel);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.72), 0 24px 70px rgba(0, 0, 0, 0.4);
 }
 
 .typhoon-title {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  letter-spacing: 0.02em;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 850;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.typhoon-kicker {
+  color: var(--gold-soft);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .gold-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(246, 211, 138, 0.62), transparent);
+}
+
+.poster-sheen {
+  position: relative;
+}
+
+.poster-sheen::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(246, 211, 138, 0.1) 34%, transparent 58%),
+    radial-gradient(circle at 70% 20%, rgba(246, 211, 138, 0.15), transparent 28%);
+  opacity: 0.72;
 }

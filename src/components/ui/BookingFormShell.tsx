@@ -10,14 +10,14 @@ type BookingFormShellProps = {
 };
 
 const inputClasses =
-  "min-h-11 rounded-md border border-amber-100/14 bg-black/30 px-3 py-2 text-stone-100 outline-none transition placeholder:text-stone-500 focus:border-amber-200/60";
+  "min-h-12 rounded-sm border border-amber-100/16 bg-black/42 px-4 py-3 text-stone-100 outline-none transition placeholder:text-stone-500 focus:border-amber-200/70 focus:bg-black/62";
 
 export function BookingFormShell({ notice, privacy, submitLabel }: BookingFormShellProps) {
   const [message, setMessage] = useState("");
 
   return (
     <form
-      className="grid gap-5 rounded-lg border border-amber-100/12 bg-stone-950/60 p-5 sm:p-7"
+      className="typhoon-frame grid gap-5 p-5 sm:p-7"
       onSubmit={(event) => {
         event.preventDefault();
         setMessage(notice);
@@ -53,7 +53,7 @@ export function BookingFormShell({ notice, privacy, submitLabel }: BookingFormSh
         Nachricht
         <textarea className={`${inputClasses} min-h-36 resize-y`} name="message" placeholder="Worum geht es?" required />
       </label>
-      <p className="text-sm leading-6 text-stone-400">{privacy}</p>
+      <p className="border-l border-amber-200/30 pl-4 text-sm leading-6 text-stone-400">{privacy}</p>
       <div className="flex flex-wrap items-center gap-4">
         <Button type="submit">{submitLabel}</Button>
         {message ? <p className="text-sm font-semibold text-amber-100">{message}</p> : null}

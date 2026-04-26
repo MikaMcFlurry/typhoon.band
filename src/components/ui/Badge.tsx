@@ -6,8 +6,8 @@ type BadgeProps = {
 };
 
 const tones = {
-  gold: "border-amber-300/35 bg-amber-300/10 text-amber-100",
-  muted: "border-stone-300/15 bg-stone-200/5 text-stone-300",
+  gold: "border-amber-300/45 bg-amber-300/12 text-amber-100 shadow-[0_0_18px_rgba(215,161,74,0.12)]",
+  muted: "border-stone-300/16 bg-stone-200/6 text-stone-300",
   danger: "border-red-300/35 bg-red-500/10 text-red-100",
 };
 

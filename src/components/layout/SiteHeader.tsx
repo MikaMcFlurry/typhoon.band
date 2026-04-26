@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeaderNav } from "@/components/layout/HeaderNav";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { Button } from "@/components/ui/Button";
-import { navItems } from "@/config/site";
 import { publicAsset } from "@/lib/assets";
 import type { Locale } from "@/types/content";
 
@@ -18,12 +17,12 @@ export function SiteHeader({ locale, labels }: SiteHeaderProps) {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-amber-100/12 bg-black/92 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1840px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex min-w-32 items-center" href={`/${locale}`}>
+    <header className="sticky top-0 z-50 border-b border-amber-100/12 bg-black/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-[1840px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-10">
+        <Link className="flex min-w-24 items-center" href={`/${locale}`}>
           <Image
             alt="Typhoon logo"
-            className="h-auto w-32 object-contain sm:w-40"
+            className="h-auto w-28 object-contain sm:w-34"
             height={52}
             priority
             src={logoSrc}
@@ -31,25 +30,9 @@ export function SiteHeader({ locale, labels }: SiteHeaderProps) {
             width={180}
           />
         </Link>
-        <nav aria-label="Main navigation" className="hidden items-center gap-2 lg:flex">
-          {navItems.map((item) => {
-            const key = item.href === "" ? "home" : item.href.slice(1);
-            return (
-              <Link
-                className="border-b border-transparent px-3 py-2 text-sm font-black uppercase text-stone-200 transition hover:border-amber-300 hover:text-amber-100"
-                href={`/${locale}${item.href}`}
-                key={item.href || "home"}
-              >
-                {labels[key] ?? item.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-1 items-center justify-end gap-4">
+          <HeaderNav labels={labels} locale={locale} />
           <LanguageSwitcher locale={locale} />
-          <Button className="hidden sm:inline-flex" href={`/${locale}/booking`} variant="secondary">
-            {labels.booking}
-          </Button>
         </div>
       </div>
     </header>
