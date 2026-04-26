@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050403;
+  --foreground: #f4ead8;
+  --gold: #d7a14a;
+  --gold-soft: #f6d38a;
+  --line: rgba(246, 211, 138, 0.24);
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(159, 100, 39, 0.2), transparent 36rem),
+    linear-gradient(180deg, #080604 0%, #050403 52%, #100a06 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+body::before {
+  pointer-events: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 0.095;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 0 0.7px, transparent 0.9px),
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 19px 23px, 5px 5px;
+  mix-blend-mode: soft-light;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(245, 190, 95, 0.45);
+  color: #fff8ec;
+}
+
+.typhoon-frame {
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(215, 161, 74, 0.08), transparent 42%),
+    rgba(7, 6, 5, 0.74);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.72), 0 24px 70px rgba(0, 0, 0, 0.36);
+}
+
+.typhoon-title {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(246, 211, 138, 0.62), transparent);
+}
