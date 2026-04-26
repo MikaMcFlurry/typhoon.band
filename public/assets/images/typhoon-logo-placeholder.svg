@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Typhoon logo placeholder">
+  <rect width="512" height="512" fill="#120c08"/>
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#d7a14a" stroke-width="18"/>
+  <path d="M117 288c70-117 187-122 278-60-54-12-115 4-153 50 46-12 88-3 126 27-79 5-146 30-202 76 15-37 36-68 63-93-40 2-76 19-112 50z" fill="#d7a14a"/>
+  <text x="256" y="165" text-anchor="middle" fill="#f4ead8" font-family="Arial, sans-serif" font-size="58" font-weight="700">TYPHOON</text>
+</svg>
