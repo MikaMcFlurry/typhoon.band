@@ -39,9 +39,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <>
-      <SiteHeader labels={dictionary.nav} locale={locale} />
+      <SiteHeader bookingLabel={dictionary.common.booking} labels={dictionary.nav} locale={locale} />
       <main>{children}</main>
-      <SiteFooter locale={locale} />
+      <SiteFooter labels={dictionary.footer} locale={locale} />
     </>
   );
 }

@@ -6,11 +6,5 @@ type CardProps = {
 };
 
 export function Card({ children, className = "" }: CardProps) {
-  return (
-    <div
-      className={`typhoon-frame rounded-none p-5 ${className}`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`poster-frame relative p-6 ${className}`}>{children}</div>;
 }

@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/Button";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { publicAsset } from "@/lib/assets";
 import Image from "next/image";
+import Link from "next/link";
 import type { Locale } from "@/types/content";
+
+const BAND_IMAGE = "/assets/reference/typhoon-band-hero.jpg";
 
 type BandIntroProps = {
   locale: Locale;
@@ -12,25 +12,30 @@ type BandIntroProps = {
 };
 
 export function BandIntro({ locale, title, copy, cta }: BandIntroProps) {
-  const bandImage = publicAsset(
-    ["/assets/reference/member-typhoon-singer.png", "/assets/reference/member-taifun-singer.jpeg"],
-    "/assets/images/member-placeholder.svg",
-  );
-
   return (
-    <section className="border-y border-amber-100/10 bg-black/28">
-      <div className="mx-auto grid max-w-[1840px] gap-8 px-4 py-20 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-12">
-        <div className="typhoon-frame relative min-h-80 overflow-hidden">
-          <Image alt="Taifun live am Mikrofon" className="object-cover" fill src={bandImage} />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.78))]" />
+    <section className="relative border-y border-amber-100/10 bg-[linear-gradient(180deg,rgba(0,0,0,0.6)_0%,rgba(20,12,6,0.4)_50%,rgba(0,0,0,0.7)_100%)]">
+      <div className="grain" />
+      <div className="mx-auto grid max-w-[1640px] gap-10 px-4 py-24 sm:px-6 md:grid-cols-[1fr_1.2fr] lg:gap-16 lg:px-10">
+        <div className="poster-frame relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[460px]">
+          <Image alt="Typhoon Band" className="object-cover object-[60%_30%]" fill src={BAND_IMAGE} />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgba(0,0,0,0.85))]" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-5">
+            <span className="eyebrow">Live</span>
+            <p className="display text-xl text-stone-50">Kanzlei Studio · Hechingen</p>
+          </div>
         </div>
-        <div>
-          <SectionHeading eyebrow="Typhoon" title={title} />
-          <p className="text-xl leading-9 text-stone-200">{copy}</p>
-          <div className="mt-8">
-            <Button href={`/${locale}/band`} variant="secondary">
+
+        <div className="flex flex-col justify-center">
+          <p className="eyebrow mb-4">About Typhoon</p>
+          <h2 className="display text-4xl text-stone-50 sm:text-5xl lg:text-[56px]">{title}</h2>
+          <p className="mt-6 text-lg leading-9 text-stone-200 sm:text-xl">{copy}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="btn" href={`/${locale}/band`}>
               {cta}
-            </Button>
+            </Link>
+            <Link className="btn btn-ghost" href={`/${locale}/music`}>
+              Songs anhören
+            </Link>
           </div>
         </div>
       </div>

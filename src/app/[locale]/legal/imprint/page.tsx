@@ -1,5 +1,4 @@
-import { Card } from "@/components/ui/Card";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { siteConfig } from "@/config/site";
 import { getDictionary } from "@/i18n/dictionaries";
 import { normalizeLocale } from "@/i18n/routing";
@@ -9,20 +8,31 @@ export default async function ImprintPage({ params }: { params: Promise<{ locale
   const dictionary = getDictionary(normalizeLocale(localeParam));
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <SectionHeading title={dictionary.legal.imprintTitle} />
-      <Card>
-        <address className="not-italic leading-8 text-stone-200">
-          {siteConfig.address.map((line) => (
-            <span className="block" key={line}>
-              {line}
+    <>
+      <PageHero title={dictionary.legal.imprintTitle} />
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <div className="poster-frame p-6 sm:p-8">
+          <p className="eyebrow mb-4">Anbieter</p>
+          <address className="not-italic text-base leading-8 text-stone-200">
+            {siteConfig.address.map((line) => (
+              <span className="block" key={line}>
+                {line}
+              </span>
+            ))}
+            <span className="mt-6 block">
+              <span className="text-[11px] uppercase tracking-[0.24em] text-stone-500">E-Mail</span>
+              <br />
+              <a className="hover:text-amber-200" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
             </span>
-          ))}
-          <span className="mt-6 block">E-Mail: {siteConfig.email}</span>
-          <span className="block">Telefon: {siteConfig.phone}</span>
-        </address>
-        <p className="mt-8 text-sm leading-6 text-amber-100/80">{dictionary.legal.legalReview}</p>
-      </Card>
-    </div>
+            <span className="mt-3 block">
+              <span className="text-[11px] uppercase tracking-[0.24em] text-stone-500">Telefon</span>
+              <br />
+              <a className="hover:text-amber-200" href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`}>{siteConfig.phone}</a>
+            </span>
+          </address>
+          <p className="mt-8 border-l-2 border-amber-200/40 pl-4 text-xs leading-6 text-stone-400">{dictionary.legal.legalReview}</p>
+        </div>
+      </section>
+    </>
   );
 }

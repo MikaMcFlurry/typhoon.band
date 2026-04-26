@@ -1,114 +1,138 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
-import { publicAsset } from "@/lib/assets";
+import Link from "next/link";
+import { HeroMusicPlayer } from "@/components/ui/HeroMusicPlayer";
 import type { Locale } from "@/types/content";
+
+const HERO_IMAGE = "/assets/reference/typhoon-band-hero.jpg";
+const HERO_LOGO = "/assets/reference/typhoon-logo.svg";
+
+const GENRES = ["Bluesrock", "Funk", "Soul", "Jazz", "Southern Rock"];
 
 type HeroSectionProps = {
   locale: Locale;
-  eyebrow: string;
-  headline: string;
+  headlineLines: readonly string[];
   subline: string;
   listenLabel: string;
-  bandLabel: string;
+  liveLabel: string;
   bookingLabel: string;
-  nextShowTitle: string;
-  nextShowCopy: string;
-  bookingTitle: string;
-  bookingCopy: string;
+  featuredDemoLabel: string;
 };
 
 export function HeroSection({
   locale,
-  eyebrow,
-  headline,
+  headlineLines,
   subline,
   listenLabel,
-  bandLabel,
+  liveLabel,
   bookingLabel,
-  nextShowTitle,
-  nextShowCopy,
-  bookingTitle,
-  bookingCopy,
+  featuredDemoLabel,
 }: HeroSectionProps) {
-  const heroSrc = publicAsset(
-    ["/assets/reference/typhoon-band-hero.jpg", "/assets/reference/typhoon-band-hero.jpeg"],
-    "/assets/images/typhoon-hero-placeholder.svg",
-  );
-  const logoSrc = publicAsset(
-    ["/assets/reference/typhoon-logo.svg", "/assets/reference/typhoon-logo.jpeg"],
-    "/assets/images/typhoon-logo-placeholder.svg",
-  );
-
   return (
-    <section className="relative isolate overflow-hidden border-b border-amber-100/12">
-      <div className="absolute inset-0">
-        <Image alt="Typhoon Bandmotiv" className="object-cover object-center" fill priority sizes="100vw" src={heroSrc} />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(4,3,2,0.82)_23%,rgba(10,7,4,0.34)_58%,rgba(0,0,0,0.9)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_24%,rgba(246,211,138,0.25),transparent_26%),linear-gradient(180deg,rgba(0,0,0,0.12)_0%,rgba(0,0,0,0.88)_100%)]" />
+    <section className="relative isolate overflow-hidden">
+      {/* Layer 1: background band image — focused on band members, baked logo cropped below */}
+      <div className="absolute inset-0 -z-10">
+        <div className="relative h-full w-full">
+          <Image
+            alt="Typhoon Bandfoto"
+            className="object-cover object-[60%_18%] sm:object-[65%_22%] lg:object-[72%_26%]"
+            fill
+            priority
+            sizes="100vw"
+            src={HERO_IMAGE}
+          />
+        </div>
+        {/* Layer 2: cinematic dark + sepia gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(110%_70%_at_75%_30%,rgba(180,125,70,0.32),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,3,2,0.45)_0%,rgba(5,3,2,0.15)_30%,rgba(5,3,2,0.55)_70%,rgba(5,3,2,1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,3,2,0.92)_0%,rgba(5,3,2,0.65)_38%,rgba(5,3,2,0.05)_62%,rgba(5,3,2,0.5)_100%)]" />
+        <div className="grain" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[760px] max-w-[1840px] content-end px-4 pb-8 pt-16 sm:px-6 lg:px-12">
-        <div className="max-w-3xl pb-8 pt-12">
+      {/* Hero body */}
+      <div className="relative mx-auto flex min-h-[760px] max-w-[1640px] flex-col px-4 pb-20 pt-10 sm:px-6 sm:pb-24 sm:pt-12 lg:min-h-[860px] lg:px-10 lg:pb-28 lg:pt-16">
+        {/* Top: Typhoon handwritten logo as the dominant signature overlay */}
+        <div className="relative -mx-2 sm:mx-0">
           <Image
             alt="Typhoon"
-            className="mb-8 h-auto w-[min(560px,82vw)] object-contain drop-shadow-[0_0_34px_rgba(246,211,138,0.24)]"
-            height={180}
+            className="logo-overlay h-auto w-[min(640px,86vw)] object-contain sm:w-[min(720px,72vw)] lg:w-[min(820px,52vw)]"
+            height={451}
             priority
-            src={logoSrc}
+            src={HERO_LOGO}
             unoptimized
-            width={620}
+            width={970}
           />
-          <p className="mb-4 text-base font-black uppercase text-amber-200 sm:text-lg">{eyebrow}</p>
-          <h1 className="typhoon-title max-w-4xl text-5xl leading-none text-stone-50 sm:text-6xl lg:text-7xl">{headline}</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-stone-100 sm:text-lg">{subline}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href={`/${locale}/music`}>{listenLabel}</Button>
-            <Button href={`/${locale}/band`} variant="secondary">
-              {bandLabel}
-            </Button>
-            <Button href={`/${locale}/booking`} variant="secondary">
-              {bookingLabel}
-            </Button>
-          </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,760px)_1fr] lg:items-end">
-          <div className="typhoon-frame grid grid-cols-[74px_1fr] items-center gap-4 p-3 sm:grid-cols-[82px_52px_1fr_auto]">
-            <div className="relative aspect-square overflow-hidden border border-amber-200/30">
-              <Image alt="Typhoon Demo Cover" className="object-cover" fill src={heroSrc} />
+        {/* Spacer for image breathing room */}
+        <div className="grow" />
+
+        {/* Bottom: text + buttons + player on the left */}
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,640px)_1fr] lg:items-end">
+          <div className="max-w-2xl">
+            <p className="genre-line mb-7">
+              {GENRES.map((g, i) => (
+                <span className="contents" key={g}>
+                  <span>{g}</span>
+                  {i < GENRES.length - 1 ? <span className="dot" /> : null}
+                </span>
+              ))}
+            </p>
+
+            <h1 className="display text-[clamp(2.6rem,6.5vw,5.5rem)] text-stone-50">
+              {headlineLines.map((line, i) => (
+                <span
+                  className={`block ${i === headlineLines.length - 1 ? "text-amber-200" : ""}`}
+                  key={`${line}-${i}`}
+                >
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            <p className="mt-7 max-w-xl text-base leading-7 text-stone-200 sm:text-[17px] sm:leading-8">
+              {subline}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link className="btn btn-gold" href={`/${locale}/music`}>
+                <svg aria-hidden className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5.5v13l11-6.5L8 5.5z" />
+                </svg>
+                {listenLabel}
+              </Link>
+              <Link className="btn" href={`/${locale}/shows`}>
+                {liveLabel}
+              </Link>
+              <Link className="btn btn-ghost" href={`/${locale}/booking`}>
+                {bookingLabel}
+              </Link>
             </div>
-            <span className="hidden size-12 place-items-center rounded-full border border-amber-200/40 bg-black/65 text-amber-100 sm:grid">
-              ▶
-            </span>
-            <div>
-              <p className="font-bold text-stone-50">Sen-Benim</p>
-              <div className="mt-2 h-7 overflow-hidden">
-                <div className="flex h-full items-center gap-1">
-                  {Array.from({ length: 48 }).map((_, index) => (
-                    <span
-                      className="w-0.5 bg-amber-300/80"
-                      key={index}
-                      style={{ height: `${8 + ((index * 7) % 22)}px` }}
-                    />
-                  ))}
-                </div>
-              </div>
+
+            <div className="mt-10 max-w-xl">
+              <p className="eyebrow mb-3">{featuredDemoLabel}</p>
+              <HeroMusicPlayer artist="Typhoon" badge="Demo" duration="04:12" trackTitle="Sen-Benim" />
             </div>
-            <span className="hidden text-sm text-stone-300 sm:block">00:00 / 04:28</span>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="typhoon-frame p-5">
-              <p className="typhoon-title text-2xl text-stone-50">{nextShowTitle}</p>
-              <p className="mt-4 text-4xl font-black text-amber-200">TBA</p>
-              <p className="mt-2 text-sm text-stone-300">{nextShowCopy}</p>
+
+          {/* Right side: live badge stack — fills negative space without crowding the singer */}
+          <div className="hidden flex-col items-end gap-6 self-end pb-2 lg:flex">
+            <div className="flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.32em] text-amber-200/80">
+              <span className="h-px w-14 bg-amber-200/50" />
+              Live · Studio · Bühne
             </div>
-            <div className="typhoon-frame p-5">
-              <p className="typhoon-title text-2xl text-stone-50">{bookingTitle}</p>
-              <p className="mt-4 text-sm leading-6 text-stone-300">{bookingCopy}</p>
+            <div className="poster-frame flex max-w-xs flex-col gap-3 px-5 py-4">
+              <p className="eyebrow">Seit 2018</p>
+              <p className="display text-2xl text-stone-50">7 Musiker · 1 Sound</p>
+              <p className="text-sm leading-6 text-stone-400">
+                30+ Jahre Bühnenerfahrung. Eigenes Kanzlei Studio in Hechingen.
+              </p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom feathered edge */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(5,3,2,1))]" />
     </section>
   );
 }

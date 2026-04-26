@@ -5,33 +5,21 @@ type ButtonProps = {
   children: ReactNode;
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
+  size?: "default" | "sm";
   type?: "button" | "submit";
   onClick?: () => void;
   className?: string;
 };
 
-const variants = {
-  primary:
-    "border-amber-300/80 bg-amber-300 text-stone-950 shadow-[0_0_28px_rgba(245,186,80,0.2)] hover:bg-amber-200",
-  secondary:
-    "border-amber-200/46 bg-black/42 text-amber-100 hover:border-amber-200/80 hover:bg-stone-900",
-  ghost: "border-transparent bg-transparent text-stone-200 hover:text-amber-100",
+const variantClasses: Record<NonNullable<ButtonProps["variant"]>, string> = {
+  primary: "btn btn-gold",
+  secondary: "btn",
+  ghost: "btn btn-ghost",
 };
 
-export function Button({
-  children,
-  href,
-  variant = "primary",
-  type = "button",
-  onClick,
-  className = "",
-}: ButtonProps) {
-  const classes = [
-    "inline-flex min-h-11 items-center justify-center rounded-sm border px-5 py-2.5 text-sm font-bold uppercase transition",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
-    variants[variant],
-    className,
-  ].join(" ");
+export function Button({ children, href, variant = "primary", size = "default", type = "button", onClick, className = "" }: ButtonProps) {
+  const sizeClass = size === "sm" ? "btn-sm" : "";
+  const classes = [variantClasses[variant], sizeClass, className].filter(Boolean).join(" ");
 
   if (href) {
     return (

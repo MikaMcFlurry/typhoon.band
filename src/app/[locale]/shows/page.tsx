@@ -1,28 +1,28 @@
 import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { pastShows, upcomingShows } from "@/data/shows";
 import { getDictionary } from "@/i18n/dictionaries";
 import { normalizeLocale } from "@/i18n/routing";
 import type { Show, ShowStatus } from "@/types/content";
 
-function ShowList({ shows, labels }: { shows: Show[]; labels: Record<ShowStatus, string> }) {
+function ShowRow({ show, labels }: { show: Show; labels: Record<ShowStatus, string> }) {
+  const tone = show.status === "cancelled" ? "danger" : show.status === "scheduled" ? "gold" : "muted";
+  const dateParts = show.dateLabel.split(" ");
+
   return (
-    <div className="grid gap-4">
-      {shows.map((show) => (
-        <Card className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center" key={show.id}>
-          <div>
-            <p className="text-lg font-semibold text-stone-50">{show.title}</p>
-            <p className="mt-1 text-sm text-stone-400">
-              {show.venue} · {show.city} · {show.dateLabel}
-            </p>
-          </div>
-          <Badge tone={show.status === "cancelled" ? "danger" : show.status === "scheduled" ? "gold" : "muted"}>
-            {labels[show.status]}
-          </Badge>
-        </Card>
-      ))}
-    </div>
+    <li className="poster-frame grid items-center gap-5 p-5 sm:grid-cols-[110px_1fr_auto] sm:p-6">
+      <div className="flex flex-col items-start sm:items-center sm:text-center">
+        <span className="display text-3xl text-amber-200">{dateParts[0] ?? "TBA"}</span>
+        <span className="text-[11px] uppercase tracking-[0.28em] text-stone-400">{dateParts.slice(1).join(" ") || "—"}</span>
+      </div>
+      <div>
+        <p className="display text-xl text-stone-50">{show.title}</p>
+        <p className="mt-1 text-sm text-stone-400">
+          {show.venue} · {show.city}
+        </p>
+      </div>
+      <Badge tone={tone}>{labels[show.status]}</Badge>
+    </li>
   );
 }
 
@@ -31,16 +31,40 @@ export default async function ShowsPage({ params }: { params: Promise<{ locale: 
   const dictionary = getDictionary(normalizeLocale(localeParam));
 
   return (
-    <div className="mx-auto max-w-[1840px] px-4 py-16 sm:px-6 lg:px-12">
-      <SectionHeading copy={dictionary.shows.intro} title={dictionary.shows.title} />
-      <section>
-        <h2 className="mb-5 text-2xl font-semibold text-stone-50">{dictionary.shows.upcoming}</h2>
-        <ShowList labels={dictionary.shows.status} shows={upcomingShows} />
+    <>
+      <PageHero copy={dictionary.shows.intro} eyebrow={dictionary.shows.eyebrow} title={dictionary.shows.title} />
+
+      <section className="mx-auto max-w-[1640px] px-4 py-16 sm:px-6 lg:px-10">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="display text-2xl text-stone-50 sm:text-3xl">{dictionary.shows.upcoming}</h2>
+          <span className="text-xs uppercase tracking-[0.24em] text-stone-500">{upcomingShows.length} Termine</span>
+        </div>
+        {upcomingShows.length === 0 ? (
+          <p className="poster-frame p-8 text-stone-300">{dictionary.shows.empty}</p>
+        ) : (
+          <ul className="grid gap-4">
+            {upcomingShows.map((show) => (
+              <ShowRow key={show.id} labels={dictionary.shows.status} show={show} />
+            ))}
+          </ul>
+        )}
       </section>
-      <section className="mt-12">
-        <h2 className="mb-5 text-2xl font-semibold text-stone-50">{dictionary.shows.past}</h2>
-        <ShowList labels={dictionary.shows.status} shows={pastShows} />
+
+      <section className="mx-auto max-w-[1640px] px-4 pb-24 sm:px-6 lg:px-10">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="display text-2xl text-stone-50 sm:text-3xl">{dictionary.shows.past}</h2>
+          <span className="text-xs uppercase tracking-[0.24em] text-stone-500">{pastShows.length} Termine</span>
+        </div>
+        {pastShows.length === 0 ? (
+          <p className="poster-frame p-8 text-stone-400">—</p>
+        ) : (
+          <ul className="grid gap-4">
+            {pastShows.map((show) => (
+              <ShowRow key={show.id} labels={dictionary.shows.status} show={show} />
+            ))}
+          </ul>
+        )}
       </section>
-    </div>
+    </>
   );
 }
