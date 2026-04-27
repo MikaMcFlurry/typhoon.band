@@ -33,7 +33,10 @@ export const dictionaries = {
       headlineLines: ["Smooth.", "Exceptional.", "Funk."],
       subline:
         "Typhoon verbindet türkischsprachige Texte mit Bluesrock, Funk, Soul, Jazz und Southern Rock – kraftvoll, warm und live voller Energie.",
-      featuredDemoLabel: "Featured Demo",
+      heroNewTrack: "Neuer Track",
+      heroFeaturedCta: "Listen now",
+      heroNextConcert: "Nächstes Konzert",
+      heroAllShowsCta: "Alle Termine",
       featureGrid: {
         nextShow: { kicker: "Nächste Show", title: "TBA", body: "Neue Termine werden für Bayreuth & Umgebung vorbereitet.", cta: "Alle Shows" },
         music: { kicker: "Musik · Demos", title: "Sechs neue Demos", body: "Aktuelle Demo-Aufnahmen – finale Releases folgen.", cta: "Songs anhören" },
@@ -161,7 +164,10 @@ export const dictionaries = {
       headlineLines: ["Smooth.", "Exceptional.", "Funk."],
       subline:
         "Typhoon blends Turkish lyrics with blues rock, funk, soul, jazz and southern rock – powerful, warm and full of live energy.",
-      featuredDemoLabel: "Featured Demo",
+      heroNewTrack: "New track",
+      heroFeaturedCta: "Listen now",
+      heroNextConcert: "Next concert",
+      heroAllShowsCta: "All dates",
       featureGrid: {
         nextShow: { kicker: "Next show", title: "TBA", body: "New dates around Bayreuth are being prepared.", cta: "All shows" },
         music: { kicker: "Music · Demos", title: "Six fresh demos", body: "Current demo recordings – final releases will follow.", cta: "Listen to songs" },
@@ -288,7 +294,10 @@ export const dictionaries = {
       headlineLines: ["Smooth.", "Exceptional.", "Funk."],
       subline:
         "Typhoon Türkçe sözleri blues rock, funk, soul, caz ve southern rock ile birleştirir – güçlü, sıcak ve canlı.",
-      featuredDemoLabel: "Öne çıkan demo",
+      heroNewTrack: "Yeni parça",
+      heroFeaturedCta: "Şimdi dinle",
+      heroNextConcert: "Sıradaki konser",
+      heroAllShowsCta: "Tüm tarihler",
       featureGrid: {
         nextShow: { kicker: "Sıradaki konser", title: "TBA", body: "Yeni Bayreuth ve çevre tarihleri hazırlanıyor.", cta: "Tüm konserler" },
         music: { kicker: "Müzik · Demolar", title: "Altı yeni demo", body: "Güncel demo kayıtları – final yayınlar gelecek.", cta: "Şarkıları dinle" },

@@ -16,12 +16,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       {/* 1. Hero — id="home" set inside the section */}
       <HeroSection
-        bookingLabel={dictionary.common.booking}
-        featuredDemoLabel={dictionary.home.featuredDemoLabel}
+        allShowsCta={dictionary.home.heroAllShowsCta}
+        featuredCta={dictionary.home.heroFeaturedCta}
         headlineLines={dictionary.home.headlineLines}
         listenLabel={dictionary.common.listen}
         liveLabel={dictionary.common.live}
         locale={locale}
+        newTrackKicker={dictionary.home.heroNewTrack}
+        nextConcertEyebrow={dictionary.home.heroNextConcert}
         subline={dictionary.home.subline}
       />
 

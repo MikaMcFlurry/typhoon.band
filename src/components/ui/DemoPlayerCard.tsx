@@ -1,6 +1,7 @@
 "use client";
 
 import { formatTime, useAudioPlayer } from "@/components/audio/AudioPlayerProvider";
+import { Waveform } from "@/components/audio/Waveform";
 import type { Song } from "@/types/content";
 
 type DemoPlayerCardProps = {
@@ -18,8 +19,6 @@ export function DemoPlayerCard({ song, note, featured = false, index }: DemoPlay
   const position = isCurrent ? player.position : 0;
   const duration = isCurrent ? player.duration : 0;
   const hasAudio = Boolean(song.audioSrc);
-  const totalBars = 42;
-  const playedTo = Math.floor(progress * totalBars);
 
   return (
     <article
@@ -43,15 +42,8 @@ export function DemoPlayerCard({ song, note, featured = false, index }: DemoPlay
       </header>
 
       <div>
-        <div aria-hidden className="flex h-12 items-end gap-[3px]">
-          {Array.from({ length: totalBars }).map((_, i) => (
-            <span
-              className={`w-[3px] rounded-full ${i < playedTo ? "bg-[color:var(--gold-soft)]" : "bg-[color:var(--gold-soft)]/30"}`}
-              key={i}
-              style={{ height: `${10 + ((i * 13 + 5) % 30)}px` }}
-            />
-          ))}
-        </div>
+        <Waveform bars={42} heightClass="h-12" songId={song.id} />
+
         <div className="mt-3">
           <input
             aria-label={`Position für ${song.title}`}

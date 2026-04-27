@@ -1,26 +1,24 @@
 "use client";
 
 import { formatTime, useAudioPlayer } from "@/components/audio/AudioPlayerProvider";
+import { Waveform } from "@/components/audio/Waveform";
 
 type HeroMusicPlayerProps = {
   songId: string;
   trackTitle: string;
   audioSrc?: string;
   badge?: string;
+  /** Optional kicker shown above the title (e.g. "Neuer Track"). */
+  kicker?: string;
 };
 
-export function HeroMusicPlayer({ songId, trackTitle, audioSrc, badge = "Demo" }: HeroMusicPlayerProps) {
+export function HeroMusicPlayer({ songId, trackTitle, audioSrc, badge = "Demo", kicker }: HeroMusicPlayerProps) {
   const player = useAudioPlayer();
   const isCurrent = player.currentId === songId;
   const isPlaying = isCurrent && player.isPlaying;
-  const progress = isCurrent ? player.progress : 0;
   const position = isCurrent ? player.position : 0;
   const duration = isCurrent ? player.duration : 0;
   const hasAudio = Boolean(audioSrc);
-
-  // Pre-rendered bar heights (stable on SSR, then animated client-side via progress)
-  const bars = Array.from({ length: 56 }, (_, i) => 16 + ((i * 13 + 7) % 24));
-  const playedTo = Math.floor(progress * bars.length);
 
   return (
     <div className="poster-frame relative flex items-center gap-4 px-4 py-3 sm:gap-5 sm:px-5 sm:py-4">
@@ -45,20 +43,21 @@ export function HeroMusicPlayer({ songId, trackTitle, audioSrc, badge = "Demo" }
 
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-3">
-          <p className="truncate text-sm font-bold uppercase tracking-[0.18em] text-stone-50 sm:text-base">{trackTitle}</p>
-          <span className="hidden text-[10px] uppercase tracking-[0.28em] text-[color:var(--gold-soft)]/80 sm:inline">{badge}</span>
+          <div className="min-w-0">
+            {kicker ? (
+              <p className="truncate text-[10px] font-extrabold uppercase tracking-[0.32em] text-[color:var(--gold-soft)]/85">
+                {kicker}
+              </p>
+            ) : null}
+            <p className="truncate text-sm font-bold uppercase tracking-[0.18em] text-stone-50 sm:text-base">
+              {trackTitle}
+            </p>
+          </div>
+          <span className="hidden text-[10px] uppercase tracking-[0.28em] text-[color:var(--gold-soft)]/80 sm:inline">
+            {badge}
+          </span>
         </div>
-        <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--ink-mute)]">Typhoon</p>
-
-        <div aria-hidden className="mt-2 flex h-7 items-end gap-[2px] overflow-hidden">
-          {bars.map((h, i) => (
-            <span
-              className={`wave-bar ${i < playedTo ? "opacity-100" : "opacity-35"} ${isPlaying && i % 7 === 0 ? "is-live" : ""}`}
-              key={i}
-              style={{ height: `${h}px`, animationDelay: `${(i % 7) * 120}ms` }}
-            />
-          ))}
-        </div>
+        <Waveform bars={48} className="mt-2" heightClass="h-7" songId={songId} />
       </div>
 
       <div className="hidden shrink-0 text-xs uppercase tracking-[0.22em] text-[color:var(--ink-mute)] sm:block">
