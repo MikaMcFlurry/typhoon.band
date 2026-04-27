@@ -1,10 +1,15 @@
-# Current Batch – Frontend Fix, Hero Asset, Audio, Content Corrections
+# Current Batch – Onepager Refinement
 
 ## Goal
 
-Implement a focused correction batch for the current Typhoon frontend.
+Final frontend refinement before merge. The public site is now a **onepager**:
+all key public content (band intro, all 8 members, all 6 demos, shows,
+booking + direct contact) is visible on the homepage and reachable via
+in-page anchors. The hero composition matches the mockup direction more
+closely, with the handwritten Typhoon logo moved to the lower edge of the
+hero image as a poster signature.
 
-This is not a full rebuild.
+This is **not** a full rebuild and **no backend** is added.
 
 ## Strict scope
 
@@ -19,208 +24,111 @@ Do not implement:
 - Analytics
 - External embeds
 
-## Priority
+## Implemented changes
 
-### P0
-- use new hero image
-- keep large Typhoon logo overlay above hero image
-- improve gold palette
-- make UI smoother/less boxy
-- correct band member data/order
-- pass build
+### 1. Hero refinement
+- Handwritten Typhoon SVG (`typhoon-logo.svg`) is now a separate absolute
+  overlay layer placed across the **lower edge** of the hero image.
+- High `z-index`, warm drop-shadow / glow via `.logo-overlay`, never buried
+  under gradients.
+- Desktop: large signature near the lower-right of the image.
+- Tablet/mobile: smaller, centered low for legibility, no horizontal overflow.
+- Cleaner spacing between genre line, headline, copy and CTAs; the featured
+  demo player remains visually integrated below the hero text.
+- Hero CTAs now link to in-page anchors (`#music`, `#shows`, `#booking`).
 
-### P1
-- create demo audio folder
-- copy MP3 demos from Drive if available
-- wire real audio playback
-- update song types/data
+### 2. Onepager structure
+The homepage `/[locale]` renders all public sections:
 
-### P2
-- update README
-- update .gitignore
-- polish docs only if needed
+1. Hero (`#home`)
+2. Band intro + full members grid (`#band`)
+3. All demo songs incl. featured demo (`#music`)
+4. Shows / live (`#shows`)
+5. Booking form + direct contact (`#booking` + `#contact`)
+6. Footer
 
----
-
-## Required fixes
-
-### 1. New hero image
-
-Use primary hero image:
+### 3. Anchor navigation
+The header navigation now uses anchor links scoped to the homepage:
 
 ```text
-/public/assets/reference/typhoon-band-hero-new.jpeg
+Home     → /<locale>
+Band     → /<locale>#band
+Musik    → /<locale>#music
+Shows    → /<locale>#shows
+Booking  → /<locale>#booking
+Kontakt  → /<locale>#contact
 ```
 
-Fallbacks:
+`html { scroll-padding-top: 5rem; }` and `section[id] { scroll-margin-top: 5rem; }`
+keep anchored sections clear of the sticky header.
+
+### 4. Legacy public subpages
+The old non-legal public subpages now redirect to the matching homepage
+anchors (HTTP 307, hash preserved). The pages still exist as thin redirect
+shims so any external links keep working:
 
 ```text
-/public/assets/reference/typhoon-band-hero-new.jpg
-/public/assets/reference/typhoon-band-hero.jpg
-/public/assets/reference/typhoon-band-hero.jpeg
+/<locale>/band      → /<locale>#band
+/<locale>/music     → /<locale>#music
+/<locale>/shows     → /<locale>#shows
+/<locale>/booking   → /<locale>#booking
+/<locale>/contact   → /<locale>#contact
+/<locale>/gallery   → /<locale>
 ```
 
-The new image already includes:
-- singer Typhoon in color
-- rest of the band in sepia/grunge look
-- no text inside the image
-
-Do not generate a new hero image in code.
-
-### 2. Hero logo overlay
-
-The Typhoon handwritten logo must remain a separate overlay layer.
-
-Requirements:
-- absolute positioned
-- high z-index
-- above the hero image
-- gold/cream look
-- subtle glow/drop-shadow
-- large and dominant on desktop
-- responsive on tablet/mobile
-- never buried under gradients
-- not placed as normal inline content
-- header logo remains smaller and separate
-
-### 3. Color correction
-
-Replace yellow-looking accents with refined gold/champagne/bronze.
-
-Use the rules in:
+Legal pages remain as separate routes:
 
 ```text
-docs/typhoon-design-system.md
+/<locale>/legal/imprint
+/<locale>/legal/privacy
 ```
 
-Gold should feel premium and warm, not bright yellow.
-
-### 4. Smoother UI
-
-Make UI surfaces smoother:
-- rounded premium cards
-- softer borders
-- pill buttons
-- refined shadows
-- subtle inner light
-- polished glass/bronze panels
-
-Reduce:
-- harsh rectangular card grids
-- cheap yellow outlines
-- boxy layouts
-
-### 5. Demo audio
-
-Create or verify:
+### 5. Members
+All 8 musicians appear on the homepage `MembersSection`, in the corrected
+order (singer first):
 
 ```text
-/public/assets/audio/demos/
+1. Typhoon  – Gesang
+2. Mika     – Posaune
+3. Schack   – Saxophon
+4. Hardy    – Trompete
+5. Stefan   – Funk-Bass
+6. Tom      – Schlagzeug
+7. Buğra    – Gitarre
+8. Jürgen   – Gitarre
 ```
 
-Add a README.md inside this folder if it does not exist.
-
-The source MP3 files may be available in Google Drive:
+### 6. Music / demos
+All 6 demos are visible on the homepage:
 
 ```text
-Musik/Typhoon/Demos
+Sen-Benim · Karanfill · Gece Yine Düştün · Farksilin · Çılgın · Bir Tek Sen
 ```
 
-Use the MP3 files directly if available. Do not convert unless absolutely necessary.
+The hero keeps a compact featured demo teaser (Sen-Benim). The full
+`MusicSection` below shows the featured demo plus all remaining demos.
+Audio playback uses local MP3s under `/public/assets/audio/demos/`. No
+download buttons.
 
-Expected final filenames:
+### 7. Booking + direct contact
+The homepage `BookingContactSection` includes:
+- the booking form (UI-only, prepared notice on submit)
+- a contact card with `booking@typhoon.band`, `info@typhoon.band` and the
+  phone number from `siteConfig`
+- a "Was wir mitbringen" panel with the live-set summary
 
-```text
-sen-benim.mp3
-karanfill.mp3
-gece-yine-dustun.mp3
-farksilin.mp3
-cilgin.mp3
-bir-tek-sen.mp3
-```
+## Quality
 
-Do not commit raw/non-MP3 audio files.
-
-### 6. Audio player
-
-Update song data/types and player UI so demo songs can be played directly from local MP3 paths.
-
-Requirements:
-- HTML audio playback
-- local files only
-- no download button
-- no external player
-- no Spotify/SoundCloud embed
-- handle missing files gracefully
-- one song should play at a time if reasonably possible
-- works on homepage teaser and music page
-
-### 7. Band member corrections
-
-Use exact member facts from:
-
-```text
-docs/typhoon-content-facts.md
-```
-
-Must fix:
-- singer is Typhoon, not Taifun
-- Schack is Saxophon
-- Jürgen is Gitarre
-- Daniel must not appear
-- singer card first
-- 8 musicians represented
-
-### 8. README and .gitignore
-
-Update README.md with:
-- new hero image
-- demo audio folder
-- expected MP3 filenames
-- corrected member data
-- frontend-only status
-- no backend/Supabase/Admin/Resend yet
-
-Update `.gitignore` to block raw audio/project files:
-
-```text
-*.wav
-*.aiff
-*.aif
-*.flac
-*.m4a
-*.logicx
-*.als
-*.band
-```
-
-Allow MP3 demo files:
-
-```text
-!public/assets/audio/demos/*.mp3
-```
-
-Avoid duplicates.
-
----
-
-## Before finishing
-
-Run:
-
-```bash
-npm run lint
-npm run build
-```
-
-Fix all errors.
+- `npm run lint` passes.
+- `npm run build` passes; all routes statically generated. Subpages render
+  as 307 redirects to the matching homepage anchor.
 
 ## Final summary
 
-Report:
-1. changed files
-2. visual fixes completed
-3. audio files added/mapped
-4. member corrections completed
-5. lint/build result
-6. what remains intentionally unimplemented
+Report when finishing:
+1. what changed in the hero
+2. how the logo positioning was changed
+3. how the onepager structure was implemented
+4. how public subpages were handled
+5. whether all members and demos are now visible on the homepage
+6. lint/build result

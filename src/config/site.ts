@@ -11,12 +11,13 @@ export const siteConfig = {
   address: ["Mika Hertler", "Am Schwarzen Steg 5a", "95448 Bayreuth", "Deutschland"],
 };
 
+// Onepager navigation: each entry is a hash-anchor on the homepage.
+// `href` is the suffix appended to `/${locale}` so `""` is the top of the homepage.
 export const navItems: NavItem[] = [
   { href: "", label: "Home" },
-  { href: "/band", label: "Band" },
-  { href: "/music", label: "Musik" },
-  { href: "/shows", label: "Shows" },
-  { href: "/gallery", label: "Galerie" },
-  { href: "/booking", label: "Booking" },
-  { href: "/contact", label: "Kontakt" },
+  { href: "#band", label: "Band" },
+  { href: "#music", label: "Musik" },
+  { href: "#shows", label: "Shows" },
+  { href: "#booking", label: "Booking" },
+  { href: "#contact", label: "Kontakt" },
 ];

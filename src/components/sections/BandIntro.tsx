@@ -13,7 +13,7 @@ type BandIntroProps = {
 
 export function BandIntro({ locale, title, copy, cta }: BandIntroProps) {
   return (
-    <section className="relative border-y border-amber-100/10 bg-[linear-gradient(180deg,rgba(0,0,0,0.6)_0%,rgba(20,12,6,0.4)_50%,rgba(0,0,0,0.7)_100%)]">
+    <div className="relative border-y border-amber-100/10 bg-[linear-gradient(180deg,rgba(0,0,0,0.6)_0%,rgba(20,12,6,0.4)_50%,rgba(0,0,0,0.7)_100%)]">
       <div className="grain" />
       <div className="mx-auto grid max-w-[1640px] gap-10 px-4 py-24 sm:px-6 md:grid-cols-[1fr_1.2fr] lg:gap-16 lg:px-10">
         <div className="poster-frame relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[460px]">
@@ -30,15 +30,15 @@ export function BandIntro({ locale, title, copy, cta }: BandIntroProps) {
           <h2 className="display text-4xl text-stone-50 sm:text-5xl lg:text-[56px]">{title}</h2>
           <p className="mt-6 text-lg leading-9 text-stone-200 sm:text-xl">{copy}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn" href={`/${locale}/band`}>
-              {cta}
-            </Link>
-            <Link className="btn btn-ghost" href={`/${locale}/music`}>
+            <Link className="btn btn-gold" href={`/${locale}#music`}>
               Songs anhören
+            </Link>
+            <Link className="btn btn-ghost" href={`/${locale}#booking`}>
+              {cta}
             </Link>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -26,8 +26,12 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
   }, [pathname]);
 
   const isActive = (href: string) => {
-    const target = `/${locale}${href}`;
     if (href === "") return pathname === `/${locale}` || pathname === `/${locale}/`;
+    // Anchor links don't carry an active state across navigation; the active
+    // state is purely visual on click. Path-based subpages (legal etc.) match
+    // when their pathname is current.
+    if (href.startsWith("#")) return false;
+    const target = `/${locale}${href}`;
     return pathname === target || pathname?.startsWith(`${target}/`);
   };
 
@@ -67,7 +71,7 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
           <SocialIconLinks />
           <span className="gold-divider-v h-7" />
           <LanguageSwitcher locale={locale} />
-          <Link className="btn btn-gold btn-sm" href={`/${locale}/booking`}>
+          <Link className="btn btn-gold btn-sm" href={`/${locale}#booking`}>
             {bookingLabel}
           </Link>
         </div>

@@ -63,6 +63,11 @@ html {
   background: var(--bg-0);
   color: var(--ink);
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset sticky header for anchor jumps */
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {

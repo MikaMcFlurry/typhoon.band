@@ -1,15 +1,16 @@
 # Typhoon Website
 
-Premium static frontend MVP for the band Typhoon. **Frontend-only.** No Supabase, no admin, no Resend, no database, no shop, no analytics, no external embeds in this batch.
+Premium static frontend MVP for the band Typhoon. **Frontend-only.** No Supabase, no admin, no Resend, no database, no shop, no analytics, no external embeds.
 
-Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten, amerikanisch-europäischem Sound und starker Live-Energie. Das Designziel ist eine dunkle, warme, sepia/gold/champagner Konzert-Poster-Ästhetik mit einer dominanten handgeschriebenen Typhoon-Signatur über dem Hero-Bild.
+The public site is a **onepager**: all key content (band intro, all 8 members, all 6 demos, shows, booking + direct contact) is visible on the homepage and reachable via in-page anchors. Legal pages remain as separate routes.
+
+Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten, amerikanisch-europäischem Sound und starker Live-Energie. Das Designziel ist eine dunkle, warme, sepia/gold/champagner Konzert-Poster-Ästhetik mit einer dominanten handgeschriebenen Typhoon-Signatur an der unteren Kante des Hero-Bildes.
 
 ## Status
 
-- Visual frontend MVP. Static content only.
+- Onepager frontend MVP. Static content only.
 - Real audio playback wired for the local demo MP3s.
 - Backend, admin, mail, database, shop and analytics are intentionally not implemented.
-- The next phase should only start after design approval.
 
 ## Tech stack
 
@@ -25,7 +26,7 @@ npm install
 npm run dev
 ```
 
-The root `/` redirects to `/de`. Locales: `/de`, `/en`, `/tr`.
+Root `/` redirects to `/de`. Locales: `/de`, `/en`, `/tr`.
 
 ## Scripts
 
@@ -36,11 +37,42 @@ npm run lint   # eslint
 npm run start  # serve production build
 ```
 
+## Public navigation (anchor-based)
+
+The header nav scrolls to homepage sections rather than separate public pages:
+
+```text
+Home     → /<locale>
+Band     → /<locale>#band       (intro + full members grid)
+Musik    → /<locale>#music      (featured demo + all 6 demos)
+Shows    → /<locale>#shows      (upcoming + past)
+Booking  → /<locale>#booking    (form)
+Kontakt  → /<locale>#contact    (direct contact card)
+```
+
+The legacy subpages (`/band`, `/music`, `/shows`, `/booking`, `/contact`, `/gallery`) still exist as thin 307-redirect shims so external links keep working.
+
+Legal pages remain as separate routes:
+
+```text
+/<locale>/legal/imprint
+/<locale>/legal/privacy
+```
+
+## Homepage section order
+
+1. Hero (`#home`) — band image, gradients, grain, large handwritten Typhoon logo as a signature across the lower edge, headline + CTAs + featured demo teaser.
+2. Band intro + all 8 members (`#band`).
+3. All 6 demos with audio playback (`#music`).
+4. Shows — upcoming + past (`#shows`).
+5. Booking form + direct contact card (`#booking` / `#contact`).
+6. Footer.
+
 ## Design system
 
 Defined in `src/app/globals.css`:
 
-- Color tokens: deep black, warm dark brown, antique gold (`#c79a4b`), champagne gold (`#e8c982`), deep gold (`#b8873b`), dark bronze, warm cream.
+- Colour tokens: deep black, warm dark brown, antique gold (`#c79a4b`), champagne gold (`#e8c982`), deep gold (`#b8873b`), dark bronze, warm cream.
 - Tailwind's `amber-*` scale is re-tuned via `@theme` to match the gold/champagne range.
 - Surfaces: `.poster-frame` (soft rounded panel, subtle gold edge, inner highlight), `.gold-rule`, `.grain`.
 - Type primitives: `.display`, `.eyebrow`, `.label-mono`, `.genre-line`.
@@ -48,46 +80,30 @@ Defined in `src/app/globals.css`:
 - Logo overlay: `.logo-overlay` (drop-shadow + warm glow).
 - Subtle CSS-only waveform animation: `.wave-bar`, `.wave-bar.is-live`.
 - Audio range slider styling: `input[type="range"].audio-range`.
+- `scroll-padding-top` + `section[id] { scroll-margin-top }` for clean anchor jumps under the sticky header.
 
 ## Hero asset
-
-Primary hero image:
 
 ```text
 /public/assets/reference/typhoon-band-hero-new.jpeg
 ```
 
-It already contains the singer Typhoon in colour with the rest of the band in sepia/grunge. There is no text inside the image. The handwritten Typhoon SVG (`typhoon-logo.svg`) sits as a separate absolute-positioned overlay layer above the image.
-
-Fallback hero images are kept for safety:
-
-```text
-/public/assets/reference/typhoon-band-hero.jpg
-/public/assets/reference/Website-mockup.PNG
-```
+Singer Typhoon in colour, the rest of the band in sepia/grunge, no text inside the image. The handwritten Typhoon SVG (`typhoon-logo.svg`) sits as a separate absolute-positioned overlay layer along the lower edge of the hero.
 
 ## Demo audio
 
-Local MP3 demos live under:
+Local MP3 demos:
 
 ```text
-/public/assets/audio/demos/
+/public/assets/audio/demos/sen-benim.mp3
+/public/assets/audio/demos/karanfill.mp3
+/public/assets/audio/demos/gece-yine-dustun.mp3
+/public/assets/audio/demos/farksilin.mp3
+/public/assets/audio/demos/cilgin.mp3
+/public/assets/audio/demos/bir-tek-sen.mp3
 ```
 
-Expected filenames (exposed under `/assets/audio/demos/<file>` at runtime):
-
-```text
-sen-benim.mp3
-karanfill.mp3
-gece-yine-dustun.mp3
-farksilin.mp3
-cilgin.mp3
-bir-tek-sen.mp3
-```
-
-The audio player is built around `src/components/audio/AudioPlayerProvider.tsx` (client-side React context) and ensures **only one demo plays at a time**. There is no download button, no external player and no Spotify/SoundCloud embed. If a file is missing, the play button stays disabled and the card shows "Bald verfügbar" as a graceful fallback.
-
-Source MP3s may also be available in Google Drive under `Musik/Typhoon/Demos`. They are used directly as MP3, no re-encoding.
+Single shared `<audio>` element via `src/components/audio/AudioPlayerProvider.tsx` → only one demo plays at a time. No download button, no external player. Missing files render a disabled play button with a "Bald verfügbar" fallback.
 
 ## Band members (8 musicians)
 
@@ -104,26 +120,18 @@ Source of truth: `docs/typhoon-content-facts.md`.
 8. Jürgen   – Gitarre
 ```
 
-Important corrections that landed in this batch:
-
-- Singer is **Typhoon**, not Taifun.
-- Saxophonist is **Schack**, not Jürgen.
-- Guitarist is **Jürgen**, not Daniel. Daniel is removed.
-- Singer card is **first**.
-- Total represented musicians: **8**.
-
 ## Important files
 
-- `src/app/[locale]/` – locale routing and public pages (Home, Band, Music, Shows, Gallery, Booking, Contact, Legal).
-- `src/app/[locale]/layout.tsx` – wraps pages in `AudioPlayerProvider`, header and footer.
-- `src/components/audio/AudioPlayerProvider.tsx` – single shared HTMLAudioElement, single-song-at-a-time playback context.
-- `src/components/sections/HeroSection.tsx` – hero with new image + logo overlay + featured demo player.
-- `src/components/ui/HeroMusicPlayer.tsx`, `FeaturedDemo.tsx`, `DemoPlayerCard.tsx` – wired audio UIs.
-- `src/data/songs.ts` – demo song list including `audioSrc` paths.
-- `src/data/members.ts` – corrected band roster.
-- `src/i18n/dictionaries.ts` – DE/EN/TR copy (DE is primary).
-- `src/config/site.ts` – navigation, contact info, locales.
-- `docs/` – content facts, design system, asset map and technical plan.
+- `src/app/[locale]/page.tsx` – the onepager.
+- `src/app/[locale]/{band,music,shows,booking,contact,gallery}/page.tsx` – thin redirect shims.
+- `src/app/[locale]/legal/{imprint,privacy}/page.tsx` – separate legal routes.
+- `src/app/[locale]/layout.tsx` – wraps the page in `AudioPlayerProvider`, header and footer.
+- `src/components/sections/HeroSection.tsx` – hero with new image + lower-edge logo overlay + featured demo player.
+- `src/components/sections/BandIntro.tsx`, `MembersSection.tsx`, `MusicSection.tsx`, `ShowsSection.tsx`, `BookingContactSection.tsx` – the onepager sections.
+- `src/components/audio/AudioPlayerProvider.tsx` – single-song-at-a-time playback context.
+- `src/data/{songs,members,shows,platform-links}.ts` – static seed data.
+- `src/i18n/dictionaries.ts` – DE/EN/TR copy (DE primary).
+- `src/config/site.ts` – navigation (anchors), contact info, locales.
 
 ## Booking
 
@@ -133,11 +141,11 @@ No data is stored or sent.
 
 ## Platform links
 
-`src/data/platform-links.ts`. When a real URL is set and `active: true`, the social icon becomes an actual link. Otherwise it stays as a muted SVG placeholder.
+`src/data/platform-links.ts`. When `active: true` and a real URL is set, the social icon becomes a link. Otherwise it stays as a muted SVG placeholder.
 
 ## Environment variables
 
-`.env` placeholder values (none are used in this batch):
+`.env` placeholder values (none used in this batch):
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=

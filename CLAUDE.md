@@ -56,14 +56,31 @@ The script logo is never to be inlined as a flow image, never buried under dark 
 
 ## Pages
 
-- Home → poster-style landing page (Hero · FeatureGrid · BandIntro · Members · closing CTA).
-- Band → editorial layout with band photo + members grid.
-- Music → featured demo block + demo player cards (no real audio).
-- Shows → upcoming + past lists with status badges. Empty states must look intentional, not broken.
-- Booking → premium form for organisers. UI-only. Submit shows "Booking-Versand wird im nächsten Batch angebunden."
-- Galerie → placeholder grid with poster frames, no real images yet.
-- Kontakt → contact cards (mail / phone / address).
-- Legal → simple, readable, serious. Imprint must include the address from `siteConfig`.
+The public site is a **onepager**. The homepage `/[locale]` shows all key
+public content stacked into anchored sections:
+
+1. Hero (`#home`) — full-bleed band image, sepia/dark gradients, grain, the
+   handwritten Typhoon SVG as a separate overlay layer along the lower edge,
+   headline / CTAs / featured demo teaser on the left.
+2. Band intro + full members grid (`#band`) — all 8 musicians, singer first.
+3. All 6 demos (`#music`) — featured demo + grid of remaining demos with
+   real local-MP3 playback.
+4. Shows (`#shows`) — upcoming + past lists with status badges. Empty
+   states must look intentional, not broken.
+5. Booking form + direct contact (`#booking` / `#contact`) — UI-only form;
+   submit shows "Booking-Versand wird im nächsten Batch angebunden."
+6. Footer.
+
+Header navigation uses anchor links (`/<locale>#band`, `#music`, `#shows`,
+`#booking`, `#contact`).
+
+Legacy public subpages (`/band`, `/music`, `/shows`, `/booking`, `/contact`,
+`/gallery`) exist only as thin server-side redirect shims to the matching
+homepage anchor so external links keep working.
+
+Legal pages remain as separate routes:
+`/<locale>/legal/imprint` and `/<locale>/legal/privacy`. Imprint must
+include the address from `siteConfig`.
 
 ## Strict no-goes
 
