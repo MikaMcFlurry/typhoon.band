@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroMusicPlayer } from "@/components/ui/HeroMusicPlayer";
+import { songs } from "@/data/songs";
 import type { Locale } from "@/types/content";
 
-const HERO_IMAGE = "/assets/reference/typhoon-band-hero.jpg";
+const HERO_IMAGE = "/assets/reference/typhoon-band-hero-new.jpeg";
 const HERO_LOGO = "/assets/reference/typhoon-logo.svg";
 
 const GENRES = ["Bluesrock", "Funk", "Soul", "Jazz", "Southern Rock"];
@@ -27,31 +28,33 @@ export function HeroSection({
   bookingLabel,
   featuredDemoLabel,
 }: HeroSectionProps) {
+  const featured = songs[0];
+
   return (
     <section className="relative isolate overflow-hidden">
-      {/* Layer 1: background band image — focused on band members, baked logo cropped below */}
+      {/* Layer 1: new hero band image (singer in color, band in sepia/grunge) */}
       <div className="absolute inset-0 -z-10">
         <div className="relative h-full w-full">
           <Image
             alt="Typhoon Bandfoto"
-            className="object-cover object-[60%_18%] sm:object-[65%_22%] lg:object-[72%_26%]"
+            className="object-cover object-[62%_28%] sm:object-[68%_30%] lg:object-[74%_32%]"
             fill
             priority
             sizes="100vw"
             src={HERO_IMAGE}
           />
         </div>
-        {/* Layer 2: cinematic dark + sepia gradients */}
-        <div className="absolute inset-0 bg-[radial-gradient(110%_70%_at_75%_30%,rgba(180,125,70,0.32),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,3,2,0.45)_0%,rgba(5,3,2,0.15)_30%,rgba(5,3,2,0.55)_70%,rgba(5,3,2,1)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,3,2,0.92)_0%,rgba(5,3,2,0.65)_38%,rgba(5,3,2,0.05)_62%,rgba(5,3,2,0.5)_100%)]" />
+        {/* Layer 2: sepia warmth + dark cinematic gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(110%_70%_at_72%_32%,rgba(199,154,75,0.28),transparent_62%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,2,1,0.4)_0%,rgba(3,2,1,0.1)_28%,rgba(3,2,1,0.55)_72%,rgba(3,2,1,1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,2,1,0.9)_0%,rgba(3,2,1,0.6)_36%,rgba(3,2,1,0.05)_62%,rgba(3,2,1,0.45)_100%)]" />
         <div className="grain" />
       </div>
 
       {/* Hero body */}
       <div className="relative mx-auto flex min-h-[760px] max-w-[1640px] flex-col px-4 pb-20 pt-10 sm:px-6 sm:pb-24 sm:pt-12 lg:min-h-[860px] lg:px-10 lg:pb-28 lg:pt-16">
-        {/* Top: Typhoon handwritten logo as the dominant signature overlay */}
-        <div className="relative -mx-2 sm:mx-0">
+        {/* Top: Typhoon handwritten logo as the dominant signature overlay layer */}
+        <div className="relative z-20 -mx-2 sm:mx-0">
           <Image
             alt="Typhoon"
             className="logo-overlay h-auto w-[min(640px,86vw)] object-contain sm:w-[min(720px,72vw)] lg:w-[min(820px,52vw)]"
@@ -67,7 +70,7 @@ export function HeroSection({
         <div className="grow" />
 
         {/* Bottom: text + buttons + player on the left */}
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,640px)_1fr] lg:items-end">
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,640px)_1fr] lg:items-end">
           <div className="max-w-2xl">
             <p className="genre-line mb-7">
               {GENRES.map((g, i) => (
@@ -81,7 +84,7 @@ export function HeroSection({
             <h1 className="display text-[clamp(2.6rem,6.5vw,5.5rem)] text-stone-50">
               {headlineLines.map((line, i) => (
                 <span
-                  className={`block ${i === headlineLines.length - 1 ? "text-amber-200" : ""}`}
+                  className={`block ${i === headlineLines.length - 1 ? "text-[color:var(--gold-soft)]" : ""}`}
                   key={`${line}-${i}`}
                 >
                   {line}
@@ -89,9 +92,7 @@ export function HeroSection({
               ))}
             </h1>
 
-            <p className="mt-7 max-w-xl text-base leading-7 text-stone-200 sm:text-[17px] sm:leading-8">
-              {subline}
-            </p>
+            <p className="mt-7 max-w-xl text-base leading-7 text-stone-200 sm:text-[17px] sm:leading-8">{subline}</p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link className="btn btn-gold" href={`/${locale}/music`}>
@@ -110,20 +111,20 @@ export function HeroSection({
 
             <div className="mt-10 max-w-xl">
               <p className="eyebrow mb-3">{featuredDemoLabel}</p>
-              <HeroMusicPlayer artist="Typhoon" badge="Demo" duration="04:12" trackTitle="Sen-Benim" />
+              <HeroMusicPlayer audioSrc={featured.audioSrc} songId={featured.id} trackTitle={featured.title} />
             </div>
           </div>
 
-          {/* Right side: live badge stack — fills negative space without crowding the singer */}
+          {/* Right: badge panel filling negative space */}
           <div className="hidden flex-col items-end gap-6 self-end pb-2 lg:flex">
-            <div className="flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.32em] text-amber-200/80">
-              <span className="h-px w-14 bg-amber-200/50" />
+            <div className="flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.32em] text-[color:var(--gold-soft)]/85">
+              <span className="h-px w-14 bg-[color:var(--gold-soft)]/50" />
               Live · Studio · Bühne
             </div>
-            <div className="poster-frame flex max-w-xs flex-col gap-3 px-5 py-4">
-              <p className="eyebrow">Seit 2018</p>
-              <p className="display text-2xl text-stone-50">7 Musiker · 1 Sound</p>
-              <p className="text-sm leading-6 text-stone-400">
+            <div className="poster-frame flex max-w-xs flex-col gap-3 px-6 py-5">
+              <p className="eyebrow">Live Collective</p>
+              <p className="display text-2xl text-stone-50">8 Musiker · 1 Sound</p>
+              <p className="text-sm leading-6 text-[color:var(--ink-mute)]">
                 30+ Jahre Bühnenerfahrung. Eigenes Kanzlei Studio in Hechingen.
               </p>
             </div>
@@ -132,7 +133,7 @@ export function HeroSection({
       </div>
 
       {/* Bottom feathered edge */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(5,3,2,1))]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(3,2,1,1))]" />
     </section>
   );
 }

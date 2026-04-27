@@ -10,6 +10,7 @@ export type Song = {
   title: string;
   tag: "Demo";
   note?: string;
+  audioSrc?: string;
 };
 
 export type Member = {

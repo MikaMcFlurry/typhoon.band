@@ -38,3 +38,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw audio / DAW project files (never commit – only MP3 demos under
+# public/assets/audio/demos/ are allowed)
+*.wav
+*.aiff
+*.aif
+*.flac
+*.m4a
+*.logicx
+*.als
+*.band
+
+# explicit allowlist for the public demo MP3s
+!public/assets/audio/demos/*.mp3

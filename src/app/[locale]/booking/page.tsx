@@ -46,7 +46,7 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
           <div className="poster-frame p-6 sm:p-8">
             <p className="eyebrow">Was wir mitbringen</p>
             <ul className="mt-4 flex flex-col gap-3 text-sm leading-6 text-stone-300">
-              <li className="border-l border-amber-200/40 pl-4">7 Musiker · komplettes Live-Set</li>
+              <li className="border-l border-amber-200/40 pl-4">8 Musiker · komplettes Live-Set</li>
               <li className="border-l border-amber-200/40 pl-4">Eigenes Stage-Setup nach Absprache</li>
               <li className="border-l border-amber-200/40 pl-4">Set-Längen 60–120 Minuten</li>
               <li className="border-l border-amber-200/40 pl-4">Festival, Club, Firmenevent, Privat</li>

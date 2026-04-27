@@ -59,7 +59,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               className="object-cover object-center"
               fill
               sizes="100vw"
-              src="/assets/reference/typhoon-band-hero.jpg"
+              src="/assets/reference/typhoon-band-hero-new.jpeg"
             />
           </div>
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,3,2,0.95)_0%,rgba(5,3,2,0.75)_60%,rgba(5,3,2,0.45)_100%)]" />

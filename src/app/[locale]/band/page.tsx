@@ -5,7 +5,7 @@ import { members } from "@/data/members";
 import { getDictionary } from "@/i18n/dictionaries";
 import { normalizeLocale } from "@/i18n/routing";
 
-const BAND_IMAGE = "/assets/reference/typhoon-band-hero.jpg";
+const BAND_IMAGE = "/assets/reference/typhoon-band-hero-new.jpeg";
 
 export default async function BandPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;
@@ -34,7 +34,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,0.85))]" />
             <div className="absolute inset-x-0 bottom-0 p-5">
               <p className="eyebrow">Foto</p>
-              <p className="display text-xl text-stone-50">Sieben Musiker · ein Sound</p>
+              <p className="display text-xl text-stone-50">Acht Musiker · ein Sound</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,14 @@
 import type { Member } from "@/types/content";
 
+// Source of truth: docs/typhoon-content-facts.md (8 musicians, singer first)
 export const members: Member[] = [
+  {
+    id: "typhoon",
+    name: "Typhoon",
+    role: "Gesang",
+    image: "/assets/reference/member-typhoon-singer.png",
+    description: "Frontmann mit türkischsprachigen Texten und der direkten Energie im Zentrum der Band.",
+  },
   {
     id: "mika",
     name: "Mika",
@@ -9,15 +17,8 @@ export const members: Member[] = [
     description: "Junger Posaunen-Sound, rauer Live-Charakter und warme Brass-Linien.",
   },
   {
-    id: "taifun",
-    name: "Taifun",
-    role: "Gesang",
-    image: "/assets/reference/member-typhoon-singer.png",
-    description: "Frontmann, türkischsprachige Texte und die direkte Energie im Zentrum der Band.",
-  },
-  {
-    id: "jurgen",
-    name: "Jürgen",
+    id: "schack",
+    name: "Schack",
     role: "Saxophon",
     description: "Erfahrung, warme Linien und ein souliger Ton für die Bläsersektion.",
     isPlaceholder: true,
@@ -51,10 +52,10 @@ export const members: Member[] = [
     isPlaceholder: true,
   },
   {
-    id: "daniel",
-    name: "Daniel",
+    id: "jurgen",
+    name: "Jürgen",
     role: "Gitarre",
-    description: "Southern-Rock-Farbe, Riffs und rhythmische Schwere.",
+    description: "Riffs, rhythmische Schwere und southern-rock-getränkte Phrasierung.",
     isPlaceholder: true,
   },
 ];

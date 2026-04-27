@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AudioPlayerProvider } from "@/components/audio/AudioPlayerProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { locales } from "@/config/site";
@@ -38,10 +39,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const dictionary = getDictionary(locale);
 
   return (
-    <>
+    <AudioPlayerProvider>
       <SiteHeader bookingLabel={dictionary.common.booking} labels={dictionary.nav} locale={locale} />
       <main>{children}</main>
       <SiteFooter labels={dictionary.footer} locale={locale} />
-    </>
+    </AudioPlayerProvider>
   );
 }

@@ -1,20 +1,19 @@
 # Typhoon Website
 
-Premium static frontend MVP for the band Typhoon. This batch is a **visual rebuild done with Claude Code**, on top of the existing Next.js / TypeScript / Tailwind base. The previous Codex-generated visual design has been replaced – the technical setup (routing, data files, components, build config) has been reused.
+Premium static frontend MVP for the band Typhoon. **Frontend-only.** No Supabase, no admin, no Resend, no database, no shop, no analytics, no external embeds in this batch.
 
-Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten, amerikanisch-europäischem Sound und starker Live-Energie. Das Designziel dieses Batches ist eine dunkle, warme, sepia/goldene Konzert-Poster-Ästhetik mit einer dominanten handgeschriebenen Typhoon-Signatur über dem Hero-Bild.
+Typhoon verbindet Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten, amerikanisch-europäischem Sound und starker Live-Energie. Das Designziel ist eine dunkle, warme, sepia/gold/champagner Konzert-Poster-Ästhetik mit einer dominanten handgeschriebenen Typhoon-Signatur über dem Hero-Bild.
 
 ## Status
 
-- Visual rebuild only. **Static frontend, no backend logic.**
-- No Supabase, no Admin, no Resend / mail sending, no shop, no analytics, no external embeds, no external fonts.
-- Design follows the supplied screenshot references in `public/assets/reference/`.
+- Visual frontend MVP. Static content only.
+- Real audio playback wired for the local demo MP3s.
+- Backend, admin, mail, database, shop and analytics are intentionally not implemented.
 - The next phase should only start after design approval.
 
-## Tech-Stack
+## Tech stack
 
-- Next.js App Router (15.x)
-- React 19
+- Next.js App Router (15.x) · React 19
 - TypeScript
 - Tailwind CSS v4
 - System fonts only (no Google Fonts / no external font loading)
@@ -26,10 +25,7 @@ npm install
 npm run dev
 ```
 
-The root `/` redirects to `/de`. Other locales:
-
-- `/en`
-- `/tr`
+The root `/` redirects to `/de`. Locales: `/de`, `/en`, `/tr`.
 
 ## Scripts
 
@@ -37,63 +33,111 @@ The root `/` redirects to `/de`. Other locales:
 npm run dev    # dev server
 npm run build  # production build
 npm run lint   # eslint
-npm run start  # serve build
+npm run start  # serve production build
 ```
 
 ## Design system
 
 Defined in `src/app/globals.css`:
 
-- Color tokens: `--bg-0`, `--bg-1`, `--ink`, `--gold`, `--gold-soft`, `--sepia`, ...
-- Surfaces: `.poster-frame`, `.gold-rule`, `.grain`
-- Type primitives: `.display`, `.eyebrow`, `.label-mono`, `.genre-line`
-- Buttons: `.btn`, `.btn-gold`, `.btn-ghost`, `.btn-sm`
-- Logo overlay: `.logo-overlay` (drop-shadow / glow)
-- Subtle waveform animation: `.wave-bar`
+- Color tokens: deep black, warm dark brown, antique gold (`#c79a4b`), champagne gold (`#e8c982`), deep gold (`#b8873b`), dark bronze, warm cream.
+- Tailwind's `amber-*` scale is re-tuned via `@theme` to match the gold/champagne range.
+- Surfaces: `.poster-frame` (soft rounded panel, subtle gold edge, inner highlight), `.gold-rule`, `.grain`.
+- Type primitives: `.display`, `.eyebrow`, `.label-mono`, `.genre-line`.
+- Buttons: pill-shaped `.btn`, `.btn-gold` (champagne/antique gradient), `.btn-ghost`, `.btn-sm`.
+- Logo overlay: `.logo-overlay` (drop-shadow + warm glow).
+- Subtle CSS-only waveform animation: `.wave-bar`, `.wave-bar.is-live`.
+- Audio range slider styling: `input[type="range"].audio-range`.
 
-Keep additions in `globals.css` to preserve a single source of truth for the design tokens.
+## Hero asset
 
-## Wichtige Dateien
+Primary hero image:
 
-- `src/app/[locale]` – Sprachrouting und öffentliche Seiten (Home, Band, Musik, Shows, Galerie, Booking, Kontakt, Legal)
-- `src/app/[locale]/layout.tsx` – Header + Footer wrapper
-- `src/components/layout` – `SiteHeader`, `SiteFooter`, `LanguageSwitcher`
-- `src/components/sections` – `HeroSection`, `BandIntro`, `FeatureGrid`, `MemberCard`
-- `src/components/ui` – `Button`, `Card`, `Badge`, `SectionHeading`, `PageHero`, `DemoPlayerCard`, `HeroMusicPlayer`, `FeatureCard`, `BookingFormShell`, `SocialIconLinks`
-- `src/data` – Songs, Members, Shows, Plattformlinks (statisch, später aus Supabase)
-- `src/i18n/dictionaries.ts` – Sprach-Dictionary (de/en/tr) ohne externe i18n-Library
-- `src/config/site.ts` – Navigation, Site-Adresse, Locales
-- `src/lib/supabase/README.md`, `src/lib/resend/README.md` – Platzhalter für spätere Anbindung
+```text
+/public/assets/reference/typhoon-band-hero-new.jpeg
+```
 
-## Assets
+It already contains the singer Typhoon in colour with the rest of the band in sepia/grunge. There is no text inside the image. The handwritten Typhoon SVG (`typhoon-logo.svg`) sits as a separate absolute-positioned overlay layer above the image.
 
-Alle visuellen Assets liegen unter `/public/assets/reference/`:
+Fallback hero images are kept for safety:
 
-- `typhoon-logo.svg` – handgeschriebenes Typhoon-Logo, wird im Hero als dominanter Overlay-Layer eingesetzt
-- `typhoon-band-hero.jpg` – Sepia-Bandposter (alle 7 Musiker), Hero-Hintergrund
-- `member-typhoon-singer.png` – Frontmann-Foto
-- `member-mika-posaune.jpg` – Mika / Posaune
-- `Website-mockup.PNG` / `website-mockup.png` – Designreferenz
+```text
+/public/assets/reference/typhoon-band-hero.jpg
+/public/assets/reference/Website-mockup.PNG
+```
 
-Das Galerie-Modul zeigt aktuell vorbereitete Platzhalter-Frames.
+## Demo audio
 
-## Routing
+Local MP3 demos live under:
 
-Navigation: `Home · Band · Musik · Shows · Galerie · Booking · Kontakt`. Galerie und Kontakt sind als statische Platzhalter angelegt, damit es keine kaputten Links gibt.
+```text
+/public/assets/audio/demos/
+```
+
+Expected filenames (exposed under `/assets/audio/demos/<file>` at runtime):
+
+```text
+sen-benim.mp3
+karanfill.mp3
+gece-yine-dustun.mp3
+farksilin.mp3
+cilgin.mp3
+bir-tek-sen.mp3
+```
+
+The audio player is built around `src/components/audio/AudioPlayerProvider.tsx` (client-side React context) and ensures **only one demo plays at a time**. There is no download button, no external player and no Spotify/SoundCloud embed. If a file is missing, the play button stays disabled and the card shows "Bald verfügbar" as a graceful fallback.
+
+Source MP3s may also be available in Google Drive under `Musik/Typhoon/Demos`. They are used directly as MP3, no re-encoding.
+
+## Band members (8 musicians)
+
+Source of truth: `docs/typhoon-content-facts.md`.
+
+```text
+1. Typhoon  – Gesang
+2. Mika     – Posaune
+3. Schack   – Saxophon
+4. Hardy    – Trompete
+5. Stefan   – Funk-Bass
+6. Tom      – Schlagzeug
+7. Buğra    – Gitarre
+8. Jürgen   – Gitarre
+```
+
+Important corrections that landed in this batch:
+
+- Singer is **Typhoon**, not Taifun.
+- Saxophonist is **Schack**, not Jürgen.
+- Guitarist is **Jürgen**, not Daniel. Daniel is removed.
+- Singer card is **first**.
+- Total represented musicians: **8**.
+
+## Important files
+
+- `src/app/[locale]/` – locale routing and public pages (Home, Band, Music, Shows, Gallery, Booking, Contact, Legal).
+- `src/app/[locale]/layout.tsx` – wraps pages in `AudioPlayerProvider`, header and footer.
+- `src/components/audio/AudioPlayerProvider.tsx` – single shared HTMLAudioElement, single-song-at-a-time playback context.
+- `src/components/sections/HeroSection.tsx` – hero with new image + logo overlay + featured demo player.
+- `src/components/ui/HeroMusicPlayer.tsx`, `FeaturedDemo.tsx`, `DemoPlayerCard.tsx` – wired audio UIs.
+- `src/data/songs.ts` – demo song list including `audioSrc` paths.
+- `src/data/members.ts` – corrected band roster.
+- `src/i18n/dictionaries.ts` – DE/EN/TR copy (DE is primary).
+- `src/config/site.ts` – navigation, contact info, locales.
+- `docs/` – content facts, design system, asset map and technical plan.
 
 ## Booking
 
-Das Booking-Formular ist UI-only. `onSubmit` zeigt den Hinweis  
+The booking form is UI-only. Submit shows the notice  
 **„Booking-Versand wird im nächsten Batch angebunden."**  
-Es werden keine Daten gespeichert oder versendet.
+No data is stored or sent.
 
-## Plattformlinks
+## Platform links
 
-`src/data/platform-links.ts`. Wenn `active: true` und eine echte URL gesetzt ist, wird der Icon-Link aktiv. Sonst bleibt er als reiner Visual-Placeholder im Header / Footer sichtbar.
+`src/data/platform-links.ts`. When a real URL is set and `active: true`, the social icon becomes an actual link. Otherwise it stays as a muted SVG placeholder.
 
-## Environment Variables
+## Environment variables
 
-`.env` Beispielwerte (nichts davon wird in diesem Batch benutzt):
+`.env` placeholder values (none are used in this batch):
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=
@@ -103,23 +147,21 @@ RESEND_API_KEY=
 BOOKING_EMAIL=booking@typhoon.band
 ```
 
-`SUPABASE_SERVICE_ROLE_KEY` und `RESEND_API_KEY` dürfen später nur serverseitig verwendet werden.
+## Security / GDPR notes
 
-## Sicherheits- und DSGVO-Hinweise
+- No external embeds without consent.
+- No tracking / no analytics.
+- No external fonts.
+- No secrets in the frontend.
+- Audio is streamable only – no download button.
+- Imprint and privacy must be legally reviewed before launch.
 
-- Keine externen Embeds ohne Consent.
-- Kein Tracking / kein Analytics.
-- Keine externen Fonts.
-- Keine Secrets im Frontend.
-- Audios später streambar machen, ohne Download-Button.
-- Impressum und Datenschutz vor Livegang rechtlich prüfen.
+## Next planned batches
 
-## Nächste geplante Batches
-
-1. Supabase Schema + Auth + RLS
-2. Admin-Grundbereich
-3. Content-CRUD
-4. Booking mit Resend
-5. Echte Galerie-Bilder
-6. Consent / Embeds
-7. Launch-Härtung
+1. Supabase schema + auth + RLS
+2. Admin foundation
+3. Content CRUD
+4. Booking with Resend
+5. Real gallery photos
+6. Consent / external embeds
+7. Launch hardening

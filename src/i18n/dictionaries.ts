@@ -44,7 +44,7 @@ export const dictionaries = {
       bandCopy:
         "Typhoon sprengt Genregrenzen, ohne die eigene Handschrift zu verlieren: markante Blues-Riffs, funkige Grooves, soulige Melodien und jazzige Finessen, getragen von einer Band mit über 30 Jahren Bühnenleben.",
       membersTitle: "Die Band",
-      membersCopy: "Sieben Musiker, ein Sound. Erfahren, eingespielt, kompromisslos live.",
+      membersCopy: "Acht Musiker, ein Sound. Erfahren, eingespielt, kompromisslos live.",
     },
     band: {
       title: "Band",
@@ -52,7 +52,7 @@ export const dictionaries = {
       intro:
         "Typhoon ist ein kraftvoller Mix aus Bluesrock, Funk, Soul, Jazz und Southern Rock mit türkischsprachigen Texten und einem amerikanisch-europäischen Sound.",
       long:
-        "Selbstkomponierte Songs verweben markante Blues-Riffs, funkige Grooves, soulige Melodien und jazzige Finessen zu einem mitreißenden Ganzen. Ausdrucksstarke türkischsprachige Texte geben den Stücken geheimnisvolle Tiefe und kulturelle Vielfalt. Im Zentrum steht ein eingespieltes Kollektiv aus erfahrenen Musikern mit über 30 Jahren Bühnenerfahrung: Sänger Taifun, Saxophonist Jürgen, Trompeter Hardy, Funk-Bassist Stefan, Schlagzeuger Tom sowie die Gitarristen Buğra und Daniel. Im eigenen Kanzlei Studio in Hechingen entstehen Arrangements mit handwerklicher Präzision und authentischer Spielfreude.",
+        "Selbstkomponierte Songs verweben markante Blues-Riffs, funkige Grooves, soulige Melodien und jazzige Finessen zu einem mitreißenden Ganzen. Ausdrucksstarke türkischsprachige Texte geben den Stücken geheimnisvolle Tiefe und kulturelle Vielfalt. Im Zentrum steht ein eingespieltes Kollektiv aus acht erfahrenen Musikern mit über 30 Jahren Bühnenerfahrung: Sänger Typhoon, Posaunist Mika, Saxophonist Schack, Trompeter Hardy, Funk-Bassist Stefan, Schlagzeuger Tom sowie die Gitarristen Buğra und Jürgen. Im eigenen Kanzlei Studio in Hechingen entstehen Arrangements mit handwerklicher Präzision und authentischer Spielfreude.",
       sound: ["Bluesrock & Southern Rock", "Funk & Soul Grooves", "Türkische Texte", "Live-Energie"],
       note: "Pressetext-Basis. Wird im Admin-Bereich später pflegbar.",
     },
@@ -172,7 +172,7 @@ export const dictionaries = {
       bandCopy:
         "Typhoon crosses genre borders without losing its signature: blues riffs, funk grooves, soul melodies and jazz detail – carried by a band with 30+ years on stage.",
       membersTitle: "The band",
-      membersCopy: "Seven musicians, one sound. Experienced, tight, uncompromising live.",
+      membersCopy: "Eight musicians, one sound. Experienced, tight, uncompromising live.",
     },
     band: {
       title: "Band",
@@ -180,7 +180,7 @@ export const dictionaries = {
       intro:
         "Typhoon is a powerful blend of blues rock, funk, soul, jazz and southern rock with Turkish lyrics and an American-European sound.",
       long:
-        "Original songs combine blues riffs, funk grooves, soulful melodies and jazz details. Turkish lyrics add depth and cultural character. The band brings together Taifun, Jürgen, Hardy, Stefan, Tom, Buğra and Daniel as a seasoned live collective.",
+        "Original songs combine blues riffs, funk grooves, soulful melodies and jazz details. Turkish lyrics add depth and cultural character. The band brings together singer Typhoon, trombonist Mika, saxophonist Schack, trumpeter Hardy, bassist Stefan, drummer Tom and guitarists Buğra and Jürgen – eight musicians, one seasoned live collective.",
       sound: ["Blues rock & southern rock", "Funk & soul grooves", "Turkish lyrics", "Live energy"],
       note: "Press text basis. Will be editable in the admin area later.",
     },
@@ -299,7 +299,7 @@ export const dictionaries = {
       bandCopy:
         "Typhoon kendi imzasını koruyarak tür sınırlarını aşar: blues riff'leri, funk groove'ları, soul melodileri ve caz detayları – 30+ yıllık sahne deneyimine sahip bir grup.",
       membersTitle: "Grup",
-      membersCopy: "Yedi müzisyen, tek bir ses. Deneyimli, sıkı ve sahnede ödünsüz.",
+      membersCopy: "Sekiz müzisyen, tek bir ses. Deneyimli, sıkı ve sahnede ödünsüz.",
     },
     band: {
       title: "Grup",
@@ -307,7 +307,7 @@ export const dictionaries = {
       intro:
         "Typhoon; Türkçe sözler ve Amerikan-Avrupa sounduyla blues rock, funk, soul, caz ve southern rock karışımıdır.",
       long:
-        "Kendi besteleri blues riff'lerini, funk groove'larını, soul melodilerini ve caz detaylarını bir araya getirir. Türkçe sözler şarkılara derinlik ve kültürel karakter verir. Grup Taifun, Jürgen, Hardy, Stefan, Tom, Buğra ve Daniel'den oluşan deneyimli bir canlı kolektiftir.",
+        "Kendi besteleri blues riff'lerini, funk groove'larını, soul melodilerini ve caz detaylarını bir araya getirir. Türkçe sözler şarkılara derinlik ve kültürel karakter verir. Grup, vokalde Typhoon, trombonda Mika, saksafonda Schack, trompette Hardy, baste Stefan, davulda Tom ve gitarda Buğra ile Jürgen olmak üzere sekiz kişilik deneyimli bir canlı kolektiftir.",
       sound: ["Blues rock & southern rock", "Funk & soul groove", "Türkçe sözler", "Sahne enerjisi"],
       note: "Basın metni temeli. Daha sonra admin alanından düzenlenebilir.",
     },

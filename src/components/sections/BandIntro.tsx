@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/types/content";
 
-const BAND_IMAGE = "/assets/reference/typhoon-band-hero.jpg";
+const BAND_IMAGE = "/assets/reference/typhoon-band-hero-new.jpeg";
 
 type BandIntroProps = {
   locale: Locale;
