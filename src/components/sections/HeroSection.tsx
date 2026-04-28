@@ -21,20 +21,23 @@ type HeroSectionProps = {
 };
 
 /**
- * Hero composition (matches the supplied desktop / mobile mockups):
+ * Hero composition matching the supplied desktop + mobile mockups.
  *
- * Mobile  – band image full-bleed with strong dark wash on the left so the
- *           headline reads cleanly. Big handwritten Typhoon SVG sits low
- *           across the band image, just above the CTA pair, like a poster
- *           signature. Bottom row: featured demo card + next concert card,
- *           stacked.
+ * Mobile  – Band image is the upper-right backdrop of the hero, text on
+ *           the left overlays it (image blends behind text via a strong
+ *           left-side dim). The handwritten Typhoon SVG sweeps low across
+ *           the band image area as a poster signature, just above the
+ *           subline / CTAs. The full band stays recognisable thanks to
+ *           controlled object-position.
  *
- * Desktop – left text column (~46%), band image dominates the right. The
- *           handwritten logo overlay sweeps low across the right side of
- *           the image. Bottom row: featured demo + next concert side-by-side.
+ * Desktop – Two-column grid: text column on the left (~46%), the band
+ *           image fills the right column as a contained poster (no
+ *           horizontal crop — all 8 musicians visible). The handwritten
+ *           logo sits low across the lower portion of the right column.
  *
- * Layer order:  1) image  2) gradients  3) grain  4) big logo overlay
- *               5) text + CTAs + bottom panels (z-10).
+ * Layer order:  1) section bg  2) image  3) gradients  4) grain
+ *               5) big logo overlay  6) text + CTAs (z-10)
+ *               7) bottom panels (z-10).
  */
 export function HeroSection({
   locale,
@@ -51,42 +54,36 @@ export function HeroSection({
 
   return (
     <section className="relative isolate overflow-hidden bg-[var(--bg-0)]" id="home">
-      {/* 1. Background band image — focused on the band; baked logo from old asset is not present in the new image */}
-      <div className="absolute inset-0 -z-10">
+      {/* MOBILE / TABLET background — the band image is anchored to the upper
+          part of the hero, not full-bleed, so the bottom panels sit on a
+          clean black surface. Full band stays visible (object-center). */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-[58%] sm:h-[64%] lg:hidden">
         <Image
           alt="Typhoon Bandfoto"
-          className="object-cover object-[78%_30%] sm:object-[72%_30%] lg:object-[78%_32%]"
+          className="object-cover object-[center_30%]"
           fill
           priority
           sizes="100vw"
           src={HERO_IMAGE}
         />
-
-        {/* 2. Gradients
-            – horizontal wash so headline text remains legible on the left
-            – vertical fade so we transition cleanly into the next section */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,2,1,0.96)_0%,rgba(3,2,1,0.85)_24%,rgba(3,2,1,0.45)_48%,rgba(3,2,1,0.05)_72%,rgba(3,2,1,0.4)_100%)] lg:bg-[linear-gradient(90deg,rgba(3,2,1,0.94)_0%,rgba(3,2,1,0.78)_28%,rgba(3,2,1,0.3)_52%,rgba(3,2,1,0)_72%,rgba(3,2,1,0.35)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,2,1,0.35)_0%,rgba(3,2,1,0.05)_22%,rgba(3,2,1,0.4)_72%,rgba(3,2,1,0.96)_100%)]" />
-
-        {/* 3. Subtle grain */}
-        <div className="grain" />
+        {/* Warm sepia glow over the band */}
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_60%_30%,rgba(199,154,75,0.22),transparent_65%)]" />
+        {/* Strong dim on the left so the headline reads clearly */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,2,1,0.92)_0%,rgba(3,2,1,0.55)_30%,rgba(3,2,1,0.05)_62%,rgba(3,2,1,0)_100%)]" />
+        {/* Bottom fade into the section background */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(180deg,transparent,rgba(3,2,1,1))]" />
+        <div className="grain absolute inset-0" />
       </div>
 
-      {/* 4. Big handwritten Typhoon logo — separate absolute overlay layer
-             placed LOW across the band image like a poster signature.
-             pointer-events-none so it never blocks the buttons or panels. */}
+      {/* MOBILE / TABLET handwritten logo — low across the band image area */}
       <div
         aria-hidden
-        className="
-          pointer-events-none absolute z-[5]
-          right-[-4%] top-[48%] w-[108%] max-w-[600px]
-          sm:right-[-3%] sm:top-[44%] sm:w-[82%] sm:max-w-[760px]
-          lg:right-[-2%] lg:top-auto lg:bottom-[24%] lg:w-[52%] lg:max-w-[900px]
-        "
+        className="pointer-events-none absolute inset-x-0 z-[5] flex justify-end px-4 lg:hidden"
+        style={{ top: "44%" }}
       >
         <Image
           alt=""
-          className="logo-overlay-strong h-auto w-full object-contain"
+          className="logo-overlay-strong h-auto w-[88%] max-w-[440px] object-contain sm:w-[72%] sm:max-w-[560px]"
           height={451}
           priority
           src={HERO_LOGO}
@@ -95,12 +92,14 @@ export function HeroSection({
         />
       </div>
 
-      {/* 5. Foreground content */}
-      <div className="relative z-10 mx-auto flex min-h-[760px] max-w-[1640px] flex-col px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:min-h-[820px] lg:px-10 lg:pb-12 lg:pt-24">
-        <div className="grid flex-1 items-center gap-10 lg:grid-cols-[minmax(0,46%)_1fr] lg:gap-12">
-          <div className="max-w-2xl">
-            {/* Headline – single dominant element, no genre line */}
-            <h1 className="display text-[clamp(2.6rem,9vw,5.5rem)] leading-[0.95] text-stone-50 sm:text-[clamp(3.2rem,7vw,5.75rem)]">
+      {/* Hero body */}
+      <div className="relative mx-auto flex max-w-[1640px] flex-col px-4 pb-10 pt-12 sm:px-6 sm:pb-12 sm:pt-16 lg:px-10 lg:pb-12 lg:pt-12">
+        {/* DESKTOP: text on the left + image card on the right.
+            MOBILE: text on the left, image lives in the absolute backdrop
+            above; we keep a min-h to leave room for the backdrop. */}
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-12">
+          <div className="relative z-10 max-w-2xl pt-2 sm:pt-4 lg:pt-0">
+            <h1 className="display text-[clamp(2.6rem,9.5vw,5.5rem)] leading-[0.95] text-stone-50 sm:text-[clamp(3rem,7.5vw,5.75rem)]">
               {headlineLines.map((line, i) => (
                 <span className="block" key={`${line}-${i}`}>
                   {line}
@@ -108,13 +107,16 @@ export function HeroSection({
               ))}
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-7 text-stone-200/90 sm:max-w-lg sm:text-[17px] sm:leading-8">
+            {/* Mobile reserves vertical space so the headline + signature
+                logo + subline sit in the right rhythm. */}
+            <div className="h-[44vw] max-h-[260px] sm:h-[36vw] sm:max-h-[260px] lg:hidden" aria-hidden />
+
+            <p className="max-w-md text-base leading-7 text-stone-200/90 sm:max-w-lg sm:text-[17px] sm:leading-8 lg:mt-6">
               {subline}
             </p>
 
-            {/* CTAs — mobile: stacked, left-aligned (matches mockup);
-                desktop: inline pair. */}
-            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            {/* CTAs — mobile stacks left-aligned, desktop inline */}
+            <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center">
               <Link className="btn btn-gold" href={`/${locale}#music`}>
                 <svg aria-hidden className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5.5v13l11-6.5L8 5.5z" />
@@ -127,14 +129,41 @@ export function HeroSection({
             </div>
           </div>
 
-          {/* Right column intentionally empty on desktop — the band image and
-              the handwritten signature live there as background layers. */}
-          <div aria-hidden className="hidden lg:block" />
+          {/* DESKTOP-ONLY: contained band image with the handwritten logo
+              overlaid LOW across its lower portion. Full band visible
+              because the image lives in its own column with cover crop. */}
+          <div className="relative hidden aspect-[5/4.4] w-full overflow-hidden rounded-[28px] lg:block">
+            <Image
+              alt="Typhoon Band"
+              className="object-cover object-[55%_30%]"
+              fill
+              priority
+              sizes="54vw"
+              src={HERO_IMAGE}
+            />
+            {/* Edge fades so the image doesn't feel like a hard rectangle */}
+            <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[radial-gradient(120%_85%_at_60%_45%,transparent_55%,rgba(3,2,1,0.45)_85%,rgba(3,2,1,0.85)_100%)]" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 rounded-b-[28px] bg-[linear-gradient(180deg,transparent,rgba(3,2,1,0.95))]" />
+
+            {/* Big handwritten Typhoon logo as a poster signature, low. */}
+            <div className="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center">
+              <Image
+                alt=""
+                aria-hidden
+                className="logo-overlay-strong h-auto w-full max-w-[760px] object-contain"
+                height={451}
+                priority
+                src={HERO_LOGO}
+                unoptimized
+                width={970}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Bottom panels — featured demo + next concert.
+        {/* Bottom row: featured demo + next concert (mockup parity).
             Mobile: stacked. Desktop: side-by-side, constrained width. */}
-        <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:mt-14 lg:max-w-[1080px]">
+        <div className="relative z-10 mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:mt-10 lg:max-w-[1080px]">
           <HeroFeaturedDemo
             audioSrc={featured.audioSrc}
             cta={featuredCta}
@@ -145,9 +174,6 @@ export function HeroSection({
           <NextConcertPanel cta={allShowsCta} eyebrow={nextConcertEyebrow} locale={locale} />
         </div>
       </div>
-
-      {/* Bottom feathered fade into next section */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-12 bg-[linear-gradient(180deg,transparent,rgba(3,2,1,1))]" />
     </section>
   );
 }

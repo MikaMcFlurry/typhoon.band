@@ -35,20 +35,21 @@ function mulberry32(a: number) {
 }
 
 /**
- * Animated waveform visualiser.
+ * Animated waveform visualiser, used by every demo player so the look stays
+ * consistent across the Featured demo and the inline cards.
  *
  * - When the song is the currently-playing track, the bars are driven by the
- *   shared Web Audio `AnalyserNode` via requestAnimationFrame — so each demo
+ *   shared Web Audio AnalyserNode via requestAnimationFrame — so each demo
  *   gets a real-time visualisation of its actual frequency spectrum.
  * - When the song is loaded but paused or not the current track, the bars
- *   render a deterministic decorative shape derived from the song id, plus
- *   a subtle CSS pulse so the player still feels alive.
+ *   render a deterministic decorative shape derived from the song id, with a
+ *   smooth scaleY transition.
  * - The "played" portion (left of the playhead) is rendered in champagne
  *   gold; the unplayed portion in muted gold.
  */
 export function Waveform({
   songId,
-  bars = 56,
+  bars = 64,
   className = "",
   heightClass = "h-12",
   flatWhenPaused = false,
@@ -65,10 +66,11 @@ export function Waveform({
     const rng = mulberry32(seedFromId(songId));
     return Array.from({ length: bars }, (_, i) => {
       const t = i / Math.max(1, bars - 1);
-      const envelope = 0.45 + 0.55 * Math.sin(Math.PI * t); // arch
-      const jitter = 0.6 + 0.8 * rng();
+      // Two-bump envelope — looks like a real waveform, not a single arch.
+      const envelope = 0.5 + 0.4 * Math.sin(Math.PI * t) + 0.18 * Math.sin(Math.PI * t * 3);
+      const jitter = 0.55 + 0.85 * rng();
       const v = envelope * jitter;
-      return Math.min(1, Math.max(0.18, v));
+      return Math.min(1, Math.max(0.16, v));
     });
   }, [songId, bars]);
 
@@ -125,13 +127,13 @@ export function Waveform({
   return (
     <div
       aria-hidden
-      className={`relative flex items-end gap-[3px] ${heightClass} ${className}`}
+      className={`relative flex items-center gap-[2px] ${heightClass} ${className}`}
       ref={containerRef}
     >
       {idleHeights.map((_, i) => (
         <span
-          className={`origin-bottom flex-1 rounded-full transition-[background-color] duration-200 ${
-            i < playedTo ? "bg-[color:var(--gold-soft)]" : "bg-[color:var(--gold-soft)]/30"
+          className={`origin-center w-[2px] flex-1 max-w-[3px] rounded-full transition-[background-color] duration-200 ${
+            i < playedTo ? "bg-[color:var(--gold-soft)]" : "bg-[color:var(--gold-soft)]/35"
           }`}
           key={i}
           ref={(el) => {

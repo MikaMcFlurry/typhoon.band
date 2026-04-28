@@ -10,6 +10,12 @@ type FeaturedDemoProps = {
   note?: string;
 };
 
+/**
+ * Featured demo card on the homepage. Visual style is the same as the
+ * inline `DemoPlayerCard` (Waveform component, gold/champagne tokens, same
+ * play-button treatment). The featured card just gets larger typography and
+ * a slightly taller waveform, so the visual language stays consistent.
+ */
 export function FeaturedDemo({ song, eyebrow, note }: FeaturedDemoProps) {
   const player = useAudioPlayer();
   const isCurrent = player.currentId === song.id;
@@ -20,11 +26,11 @@ export function FeaturedDemo({ song, eyebrow, note }: FeaturedDemoProps) {
   const hasAudio = Boolean(song.audioSrc);
 
   return (
-    <div className="poster-frame relative flex flex-col gap-6 p-8 sm:p-10">
+    <div className="poster-frame relative flex flex-col gap-6 p-6 sm:p-8">
       <p className="eyebrow">{eyebrow}</p>
       <div>
-        <h2 className="display text-4xl text-stone-50 sm:text-5xl">{song.title}</h2>
-        <p className="mt-3 text-sm uppercase tracking-[0.24em] text-[color:var(--ink-mute)]">
+        <h2 className="display text-3xl text-stone-50 sm:text-4xl">{song.title}</h2>
+        <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-[color:var(--ink-mute)]">
           Typhoon · Demo Session
         </p>
       </div>
@@ -45,7 +51,7 @@ export function FeaturedDemo({ song, eyebrow, note }: FeaturedDemoProps) {
       <div className="flex flex-wrap items-center gap-4">
         <button
           aria-label={`${isPlaying ? "Pausieren" : "Abspielen"}: ${song.title}`}
-          className="grid h-12 w-12 place-items-center rounded-full border border-[color:var(--line-strong)] bg-black/40 text-[color:var(--gold-soft)] transition hover:border-[color:var(--gold-soft)] hover:bg-[color:var(--gold-soft)]/10 disabled:opacity-40"
+          className="grid h-12 w-12 place-items-center rounded-full border border-[color:var(--gold-soft)]/30 bg-black/50 text-[color:var(--gold-soft)] transition hover:border-[color:var(--gold-soft)]/70 hover:bg-[color:var(--gold-soft)]/10 disabled:opacity-40"
           disabled={!hasAudio}
           onClick={() => player.toggle(song.id, song.audioSrc)}
           type="button"
@@ -56,7 +62,7 @@ export function FeaturedDemo({ song, eyebrow, note }: FeaturedDemoProps) {
               <rect height="14" rx="1" width="4" x="14" y="5" />
             </svg>
           ) : (
-            <svg aria-hidden className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg aria-hidden className="h-4 w-4 translate-x-[1px]" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5.5v13l11-6.5L8 5.5z" />
             </svg>
           )}
@@ -66,7 +72,7 @@ export function FeaturedDemo({ song, eyebrow, note }: FeaturedDemoProps) {
         </span>
       </div>
 
-      {note ? <p className="text-sm leading-6 text-[color:var(--ink-mute)]/80">{note}</p> : null}
+      {note ? <p className="text-xs leading-6 text-[color:var(--ink-mute)]/80">{note}</p> : null}
     </div>
   );
 }

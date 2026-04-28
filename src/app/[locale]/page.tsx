@@ -27,21 +27,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         subline={dictionary.home.subline}
       />
 
-      {/* 2 + 3. Band intro & full members grid live under the same #band anchor */}
+      {/* 2. Band intro (compact + expandable) + members grid (compact + expandable) under #band */}
       <section id="band">
         <BandIntro
-          copy={dictionary.home.bandCopy}
-          cta={dictionary.common.bandMore}
+          collapseLabel={dictionary.common.readLess}
+          copy={dictionary.home.bandCopyShort}
+          expandLabel={dictionary.common.readMore}
           locale={locale}
+          longCopy={dictionary.home.bandCopyLong}
           title={dictionary.home.bandTitle}
         />
-        <MembersSection copy={dictionary.home.membersCopy} title={dictionary.home.membersTitle} />
+        <MembersSection
+          collapseLabel={dictionary.common.hideMembers}
+          copy={dictionary.home.membersCopy}
+          expandLabel={dictionary.common.showAllMembers}
+          title={dictionary.home.membersTitle}
+        />
       </section>
 
-      {/* 4. All demo songs */}
+      {/* 3. Music — featured + first 3 default, rest behind expand */}
       <section id="music">
         <MusicSection
+          collapseLabel={dictionary.common.hideDemos}
           copy={dictionary.music.intro}
+          expandLabel={dictionary.common.showAllDemos}
           eyebrow={dictionary.music.eyebrow}
           featuredLabel={dictionary.music.featured}
           playerNote={dictionary.music.playerNote}
@@ -49,11 +58,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         />
       </section>
 
-      {/* 5. Shows / live */}
+      {/* 4. Shows — compact, expandable past list */}
       <section id="shows">
         <ShowsSection
+          collapseLabel={dictionary.common.hideShows}
           copy={dictionary.shows.intro}
           empty={dictionary.shows.empty}
+          expandLabel={dictionary.common.showAllShows}
           eyebrow={dictionary.shows.eyebrow}
           pastLabel={dictionary.shows.past}
           statusLabels={dictionary.shows.status}
@@ -62,7 +73,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         />
       </section>
 
-      {/* 6. Booking + direct contact (#kontakt anchor lives inside) */}
+      {/* 5. Booking + direct contact (#contact anchor lives inside) */}
       <section id="booking">
         <BookingContactSection
           bookingCopy={dictionary.bookingPage.intro}
