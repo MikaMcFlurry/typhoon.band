@@ -27,7 +27,7 @@ export function SiteFooter({ locale, labels }: SiteFooterProps) {
       <div className="grain" />
       <div className="mx-auto grid max-w-[1640px] gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-10">
         <div>
-          <Image alt="Typhoon" className="h-12 w-auto logo-overlay" height={48} src={LOGO_SRC} unoptimized width={180} />
+          <Image alt="Typhoon" className="h-12 w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]" height={48} src={LOGO_SRC} unoptimized width={180} />
           <p className="mt-5 max-w-md text-sm leading-7 text-stone-400">{labels.tagline}</p>
           <div className="mt-6">
             <SocialIconLinks />

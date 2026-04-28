@@ -27,21 +27,18 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
 
   const isActive = (href: string) => {
     if (href === "") return pathname === `/${locale}` || pathname === `/${locale}/`;
-    // Anchor links don't carry an active state across navigation; the active
-    // state is purely visual on click. Path-based subpages (legal etc.) match
-    // when their pathname is current.
     if (href.startsWith("#")) return false;
     const target = `/${locale}${href}`;
     return pathname === target || pathname?.startsWith(`${target}/`);
   };
 
   return (
-    <header className="sticky top-0 z-[60] border-b border-amber-100/12 bg-[rgba(5,3,2,0.92)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1640px] items-center gap-4 px-4 sm:px-6 lg:px-10">
+    <header className="sticky top-0 z-[60] border-b border-[color:var(--gold-soft)]/10 bg-[rgba(3,2,1,0.85)] backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1640px] items-center gap-4 px-4 sm:h-18 sm:px-6 lg:h-20 lg:px-10">
         <Link aria-label="Typhoon Startseite" className="flex shrink-0 items-center" href={`/${locale}`}>
           <Image
             alt="Typhoon"
-            className="h-9 w-auto object-contain logo-overlay"
+            className="h-8 w-auto object-contain drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] sm:h-9 lg:h-10"
             height={36}
             priority
             src={LOGO_SRC}
@@ -50,7 +47,7 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
           />
         </Link>
 
-        <nav aria-label="Hauptnavigation" className="ml-6 hidden flex-1 items-center gap-7 lg:flex">
+        <nav aria-label="Hauptnavigation" className="ml-8 hidden flex-1 items-center justify-center gap-9 lg:flex">
           {navItems.map((item) => {
             const key = item.href === "" ? "home" : item.href.slice(1);
             const active = isActive(item.href);
@@ -69,33 +66,34 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
 
         <div className="ml-auto hidden items-center gap-5 lg:flex">
           <SocialIconLinks />
-          <span className="gold-divider-v h-7" />
+          <span className="gold-divider-v h-6" />
           <LanguageSwitcher locale={locale} />
-          <Link className="btn btn-gold btn-sm" href={`/${locale}#booking`}>
-            {bookingLabel}
-          </Link>
         </div>
 
+        {/* Mobile: clean borderless hamburger */}
         <button
           aria-controls="mobile-nav"
           aria-expanded={open}
-          aria-label="Menü"
-          className="ml-auto grid h-11 w-11 place-items-center border border-amber-100/12 text-amber-100 lg:hidden"
+          aria-label={open ? "Menü schließen" : "Menü öffnen"}
+          className="ml-auto grid h-11 w-11 place-items-center text-[color:var(--ink)] transition hover:text-[color:var(--gold-soft)] lg:hidden"
           onClick={() => setOpen((v) => !v)}
           type="button"
         >
-          <svg aria-hidden className="h-5 w-5" fill="none" viewBox="0 0 24 24">
+          <svg aria-hidden className="h-6 w-6" fill="none" viewBox="0 0 24 24">
             {open ? (
-              <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+              <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
             ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+              <>
+                <path d="M4 8h16" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+                <path d="M4 16h16" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+              </>
             )}
           </svg>
         </button>
       </div>
 
       {open ? (
-        <div className="border-t border-amber-100/10 bg-[rgba(5,3,2,0.97)] lg:hidden" id="mobile-nav">
+        <div className="border-t border-[color:var(--gold-soft)]/10 bg-[rgba(3,2,1,0.97)] backdrop-blur-md lg:hidden" id="mobile-nav">
           <nav className="mx-auto flex max-w-[1640px] flex-col gap-1 px-4 py-4 sm:px-6">
             {navItems.map((item) => {
               const key = item.href === "" ? "home" : item.href.slice(1);
@@ -103,18 +101,18 @@ export function SiteHeader({ locale, labels, bookingLabel }: SiteHeaderProps) {
               return (
                 <Link
                   aria-current={active ? "page" : undefined}
-                  className={`flex items-center justify-between border-b border-amber-100/8 py-3 text-sm font-extrabold uppercase tracking-[0.22em] ${active ? "text-amber-200" : "text-stone-200"}`}
+                  className={`flex items-center justify-between border-b border-[color:var(--gold-soft)]/8 py-3 text-sm font-bold uppercase tracking-[0.22em] transition ${active ? "text-[color:var(--gold-soft)]" : "text-stone-200 hover:text-[color:var(--gold-soft)]"}`}
                   href={`/${locale}${item.href}`}
                   key={item.href || "home"}
                 >
                   {labels[key] ?? item.label}
-                  <span className="text-amber-200/60">→</span>
+                  <span className="text-[color:var(--gold-soft)]/60">→</span>
                 </Link>
               );
             })}
-            <div className="mt-4 flex items-center justify-between gap-3">
+            <div className="mt-5 flex items-center justify-between gap-3">
               <LanguageSwitcher locale={locale} />
-              <Link className="btn btn-gold btn-sm" href={`/${locale}/booking`}>
+              <Link className="btn btn-gold btn-sm" href={`/${locale}#booking`}>
                 {bookingLabel}
               </Link>
             </div>

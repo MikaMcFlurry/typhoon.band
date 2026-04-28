@@ -29,20 +29,13 @@ export const dictionaries = {
       backHome: "Zur Startseite",
     },
     home: {
-      eyebrow: "Bluesrock · Funk · Soul · Jazz · Southern Rock",
-      headlineLines: ["Smooth.", "Exceptional.", "Funk."],
+      headlineLines: ["Smooth.", "Exzeptionell.", "Funk."],
       subline:
-        "Typhoon verbindet türkischsprachige Texte mit Bluesrock, Funk, Soul, Jazz und Southern Rock – kraftvoll, warm und live voller Energie.",
+        "Typhoon – die türkisch-funk & soul Band aus Leidenschaft, Groove und Energie.",
       heroNewTrack: "Neuer Track",
       heroFeaturedCta: "Listen now",
       heroNextConcert: "Nächstes Konzert",
       heroAllShowsCta: "Alle Termine",
-      featureGrid: {
-        nextShow: { kicker: "Nächste Show", title: "TBA", body: "Neue Termine werden für Bayreuth & Umgebung vorbereitet.", cta: "Alle Shows" },
-        music: { kicker: "Musik · Demos", title: "Sechs neue Demos", body: "Aktuelle Demo-Aufnahmen – finale Releases folgen.", cta: "Songs anhören" },
-        gallery: { kicker: "Galerie", title: "Live · Studio · Kanzlei", body: "Bilderstrecken aus Proberaum und Bühne folgen.", cta: "Zur Galerie" },
-        booking: { kicker: "Booking", title: "Festival · Club · Privat", body: "Wir bringen das Typhoon-Set auf eure Bühne.", cta: "Booking Anfrage" },
-      },
       bandTitle: "Amerikanisches Feeling. Europäische Seele. Türkische Texte.",
       bandCopy:
         "Typhoon sprengt Genregrenzen, ohne die eigene Handschrift zu verlieren: markante Blues-Riffs, funkige Grooves, soulige Melodien und jazzige Finessen, getragen von einer Band mit über 30 Jahren Bühnenleben.",
@@ -160,20 +153,13 @@ export const dictionaries = {
       backHome: "Back home",
     },
     home: {
-      eyebrow: "Blues rock · Funk · Soul · Jazz · Southern Rock",
       headlineLines: ["Smooth.", "Exceptional.", "Funk."],
       subline:
-        "Typhoon blends Turkish lyrics with blues rock, funk, soul, jazz and southern rock – powerful, warm and full of live energy.",
+        "Typhoon – the Turkish-funk & soul band, fueled by passion, groove and energy.",
       heroNewTrack: "New track",
       heroFeaturedCta: "Listen now",
       heroNextConcert: "Next concert",
       heroAllShowsCta: "All dates",
-      featureGrid: {
-        nextShow: { kicker: "Next show", title: "TBA", body: "New dates around Bayreuth are being prepared.", cta: "All shows" },
-        music: { kicker: "Music · Demos", title: "Six fresh demos", body: "Current demo recordings – final releases will follow.", cta: "Listen to songs" },
-        gallery: { kicker: "Gallery", title: "Live · Studio · Kanzlei", body: "Photo sets from rehearsal and stage will follow.", cta: "Open gallery" },
-        booking: { kicker: "Booking", title: "Festival · Club · Private", body: "We bring the Typhoon set to your stage.", cta: "Booking request" },
-      },
       bandTitle: "American feel. European soul. Turkish lyrics.",
       bandCopy:
         "Typhoon crosses genre borders without losing its signature: blues riffs, funk grooves, soul melodies and jazz detail – carried by a band with 30+ years on stage.",
@@ -290,20 +276,13 @@ export const dictionaries = {
       backHome: "Ana sayfaya dön",
     },
     home: {
-      eyebrow: "Blues rock · Funk · Soul · Caz · Southern Rock",
       headlineLines: ["Smooth.", "Exceptional.", "Funk."],
       subline:
-        "Typhoon Türkçe sözleri blues rock, funk, soul, caz ve southern rock ile birleştirir – güçlü, sıcak ve canlı.",
+        "Typhoon – tutku, groove ve enerji dolu Türk-funk & soul grubu.",
       heroNewTrack: "Yeni parça",
       heroFeaturedCta: "Şimdi dinle",
       heroNextConcert: "Sıradaki konser",
       heroAllShowsCta: "Tüm tarihler",
-      featureGrid: {
-        nextShow: { kicker: "Sıradaki konser", title: "TBA", body: "Yeni Bayreuth ve çevre tarihleri hazırlanıyor.", cta: "Tüm konserler" },
-        music: { kicker: "Müzik · Demolar", title: "Altı yeni demo", body: "Güncel demo kayıtları – final yayınlar gelecek.", cta: "Şarkıları dinle" },
-        gallery: { kicker: "Galeri", title: "Sahne · Stüdyo · Kanzlei", body: "Prova ve sahne fotoğrafları yakında.", cta: "Galeriye git" },
-        booking: { kicker: "Booking", title: "Festival · Kulüp · Özel", body: "Typhoon setini sahnenize taşıyalım.", cta: "Booking isteği" },
-      },
       bandTitle: "Amerikan hissi. Avrupa ruhu. Türkçe sözler.",
       bandCopy:
         "Typhoon kendi imzasını koruyarak tür sınırlarını aşar: blues riff'leri, funk groove'ları, soul melodileri ve caz detayları – 30+ yıllık sahne deneyimine sahip bir grup.",
