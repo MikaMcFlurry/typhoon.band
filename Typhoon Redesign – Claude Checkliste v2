@@ -1,0 +1,57 @@
+# Typhoon Redesign – Claude Checkliste v2
+
+## Vor dem Coden prüfen
+- [ ] Welche Frontend-Dateien rendern die öffentliche Startseite?
+- [ ] Welche Komponenten nutzen Hero, Songs, Shows, Mitglieder, Media, Booking und Footer?
+- [ ] Welche Stylesysteme existieren bereits: Tailwind, CSS Modules, globals.css?
+- [ ] Gibt es bereits News im Backend? Wenn nein: News nicht einbauen.
+- [ ] Gibt es eine AGB-Seite? Wenn nein: AGB nicht im Footer anzeigen.
+
+## Darf geändert werden
+- [ ] Public Layout
+- [ ] Public Komponenten-Markup
+- [ ] CSS/Tailwind Styling
+- [ ] Responsive Verhalten
+- [ ] UI-States/Empty States
+- [ ] Icons, sofern lokal/aus bestehendem Icon-Set
+
+## Darf nicht geändert werden
+- [ ] Supabase Schema
+- [ ] RLS Policies
+- [ ] Auth/Admin-Rollen
+- [ ] Admin-Schutz
+- [ ] Booking Servervalidierung
+- [ ] Resend-Konfiguration
+- [ ] Upload-Sicherheitsregeln
+- [ ] Consent-Logik
+- [ ] SEO-Datenmodell
+
+## Visueller Zielzustand
+- [ ] Dunkler sepia/goldener Look
+- [ ] Hero groß und posterartig
+- [ ] Goldene Primärbuttons
+- [ ] Transparente Sekundärbuttons
+- [ ] Dünne goldene Borders
+- [ ] Cards mit dunklem Panel-Look
+- [ ] Audio-Bar direkt unter Hero
+- [ ] Shows kompakt und prominent
+- [ ] Mitglieder/Media als Kartenreihen
+- [ ] Booking prominent, aber nicht überladen
+- [ ] Footer hochwertig und klar
+
+## Funktionale Regression vermeiden
+- [ ] Audio spielt weiterhin aus Backend/Supabase
+- [ ] Keine Audio-Downloads sichtbar
+- [ ] Shows filtern private/versteckte Einträge weiterhin aus
+- [ ] Ticket-Buttons nur bei gültigem Modus/Link
+- [ ] Booking speichert und sendet weiterhin korrekt
+- [ ] Videos laden erst nach Consent
+- [ ] Social Links nur bei aktiver URL
+- [ ] Legal Links aus echten legal_pages
+- [ ] Admin-Inhalte bleiben pflegbar
+
+## Finaler Claude-Output
+- [ ] Geänderte Dateien auflisten
+- [ ] Kurz erklären, was optisch angepasst wurde
+- [ ] Kurz nennen, welche Mockup-Inhalte bewusst nicht übernommen wurden
+- [ ] Offene Risiken/Todos nennen
